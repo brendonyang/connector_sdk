@@ -544,7 +544,7 @@
       end,
 
       webhook_unsubscribe: lambda do |webhook|
-        delete("https://api.intercom.io/subscriptions/#{webhook["id"]}")
+        delete("https://api.intercom.io/subscriptions/#{webhook['id']}")
       end,
 
       dedup: lambda do |message|
@@ -562,13 +562,13 @@
       help: "Triggers when a conversation is opened in intercom",
       subtitle: "Admin opened a conversation in Intercom",
 
-      webhook_subscribe: lambda do |webhook_url, connection|
+      webhook_subscribe: lambda do |webhook_url, _connection|
         post("https://api.intercom.io/subscriptions").
           payload(topics: ["conversation.admin.opened"],
                   url: webhook_url)
       end,
 
-      webhook_notification: lambda do |input, payload|
+      webhook_notification: lambda do |_input, payload|
         if payload["topic"].present? && payload["topic"] == "ping"
           response = nil
         else
@@ -577,7 +577,7 @@
       end,
 
       webhook_unsubscribe: lambda do |webhook|
-        delete("https://api.intercom.io/subscriptions/#{webhook["id"]}")
+        delete("https://api.intercom.io/subscriptions/#{webhook['id']}")
       end,
 
       dedup: lambda do |message|
@@ -587,26 +587,26 @@
       output_fields: lambda do |object_definitions|
         object_definitions["conversation"]
       end
-    },
+    }
   },
 
   pick_lists: {
     sort_order: lambda do |_connection|
       [
-        %W(#{"Created Date" } created_at),
-        %W(#{"Last Request Date" } last_request_at),
-        %W(#{"Sign Up Date" } signed_up_at),
-        %W(#{"Updated Date" } updated_at)
+        %w(Created\ Date created_at),
+        %w(Last\ Request\ Date last_request_at),
+        %w(Sign\ Up\ Date signed_up_at),
+        %w(Updated\ Date updated_at)
       ]
     end,
 
     segments: lambda do |_connection|
-      response = get("https://api.intercom.io/segments?per_page=100")["segments"].
+      get("https://api.intercom.io/segments?per_page=100")["segments"].
         map { |segment| [segment["name"], segment["id"]] }
     end,
 
     admins: lambda do |_connection|
-      response = get("https://api.intercom.io/admins")["admins"].
+      get("https://api.intercom.io/admins")["admins"].
         map { |admin| [admin["name"], admin["id"]] }
     end
   }
