@@ -22,13 +22,13 @@
       type: "oauth2",
 
       authorization_url: lambda { |connection|
-        "https://app.intercom.io/oauth?client_id=#{connection["client_id"]}"
+        "https://app.intercom.io/oauth?client_id=#{connection['client_id']}"
       },
 
       token_url: lambda { |connection|
         "https://api.intercom.io/auth/eagle/token?" \
-          "client_id=#{connection["client_id"]}&" \
-          "client_secret=#{connection["client_secret"]}"
+          "client_id=#{connection['client_id']}&" \
+          "client_secret=#{connection['client_secret']}"
       },
 
       apply: lambda { |_connection, access_token|
@@ -605,12 +605,12 @@
   pick_lists: {
     segments: lambda do |_connection|
       get("/segments?per_page=100")["segments"].
-      map { |segment| [segment["name"], segment["id"]] }
+        map { |segment| [segment["name"], segment["id"]] }
     end,
 
     admins: lambda do |_connection|
       get("/admins")["admins"].
-      map { |admin| [admin["name"], admin["id"]] }
+        map { |admin| [admin["name"], admin["id"]] }
     end
   }
 }
