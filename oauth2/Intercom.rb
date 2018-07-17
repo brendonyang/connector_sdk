@@ -48,26 +48,26 @@
       fields: lambda do
         [
           { name: "type" },
-          { name:"id" },
-          { name:"user_id" },
-          { name:"email", control_type: "email" },
-          { name:"name" },
-          { name:"app_id" },
-          { name:"last_seen_ip" },
-          { name:"unsubscribed_from_emails", type: "boolean" },
-          { name:"created_at", type: "integer" },
-          { name:"last_request_at", type: "integer" },
-          { name:"remote_created_at", type: "integer" },
-          { name:"signed_up_at", type: "integer" },
-          { name:"updated_at", type: "integer" },
-          { name:"session_count", type: "integer" },
-          { name:"user_agent_data" },
-          { name:"referrer", control_type: "url" },
-          { name:"utm_campaign", label: "UTM Campaign" },
-          { name:"utm_source", label: "UTM Source" },
-          { name:"utm_content", label: "UTM Content" },
-          { name:"utm_term", label: "UTM Term" },
-          { name:"utm_medium", label: "UTM Medium" },
+          { name: "id" },
+          { name: "user_id" },
+          { name: "email", control_type: "email" },
+          { name: "name" },
+          { name: "app_id" },
+          { name: "last_seen_ip" },
+          { name: "unsubscribed_from_emails", type: "boolean" },
+          { name: "created_at", type: "integer" },
+          { name: "last_request_at", type: "integer" },
+          { name: "remote_created_at", type: "integer" },
+          { name: "signed_up_at", type: "integer" },
+          { name: "updated_at", type: "integer" },
+          { name: "session_count", type: "integer" },
+          { name: "user_agent_data" },
+          { name: "referrer", control_type: "url" },
+          { name: "utm_campaign", label: "UTM Campaign" },
+          { name: "utm_source", label: "UTM Source" },
+          { name: "utm_content", label: "UTM Content" },
+          { name: "utm_term", label: "UTM Term" },
+          { name: "utm_medium", label: "UTM Medium" },
           {
             name: "custom_attributes", type: "object", properties: [
               { name: "phone", type: "number", control_type: "phone" },
@@ -131,14 +131,14 @@
               { name: "salesforce_record_id" }
             ]
           },
-          { name: "avatar", type: "object", properties:
-            [
+          {
+            name: "avatar", type: "object", properties: [
               { name: "type" },
               { name: "image_url", control_type: "url" }
             ]
           },
-          { name: "location_data", type: "object", properties:
-            [
+          {
+            name: "location_data", type: "object", properties: [
               { name: "type" },
               { name: "city_name" },
               { name: "continent_code" },
@@ -151,8 +151,8 @@
               { name: "timezone" }
             ]
           },
-          { name: "social_profiles", type: "object", properties:
-            [
+          {
+            name: "social_profiles", type: "object", properties: [
               { name: "type" },
               {
                 name: "social_profiles",
@@ -167,8 +167,8 @@
               }
             ]
           },
-          { name: "companies", type: "object", properties:
-            [
+          {
+            name: "companies", type: "object", properties: [
               { name: "type" },
               {
                 name: "companies", type: :array, of: :object, properties: [
@@ -179,8 +179,8 @@
               }
             ]
           },
-          { name: "segments", type: "object", properties:
-            [
+          {
+            name: "segments", type: "object", properties: [
               { name: "type" },
               {
                 name: "segments", type: "array", of: "object", properties: [
@@ -216,7 +216,7 @@
           { name: "monthly_spend", type: "integer" },
           { name: "name" },
           { name: "plan", type: "object", properties:
-            [ { name: "id" }, { name: "name" } ] },
+            [{ name: "id" }, { name: "name" }] },
           { name: "type" },
           { name: "app_id" }
         ]
@@ -268,8 +268,8 @@
                   { name: "open" },
                   { name: "read" },
                   { name: "links", type: "object", properties:
-                    [ { name: "conversation_web" } ] }
-                ] },
+                    [{ name: "conversation_web" }] }
+                ] }
             ] },
           { name: "delivery_status" },
           { name: "delivery_attempts", type: "integer" },
