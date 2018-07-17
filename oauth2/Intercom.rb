@@ -411,7 +411,7 @@
                     "admin_id": input["admin_id"],
                     "body": input["body"] }
         post("/conversations/#{input['conversation_id']}/reply", payload)
-      end,
+      end,	
 
       output_fields: lambda do |object_definitions|
         object_definitions["conversation"]
@@ -510,7 +510,7 @@
                   url: webhook_url)
       end,
 
-      webhook_notification: lambda do |input, payload|
+      webhook_notification: lambda do |_input, payload|
         if payload["topic"].present? && payload["topic"] == "ping"
           nil
         else
@@ -519,7 +519,7 @@
       end,
 
       webhook_unsubscribe: lambda do |webhook|
-        delete("/subscriptions/#{webhook["id"]}")
+        delete("/subscriptions/#{webhook['id']}")
       end,
 
       dedup: lambda do |message|
@@ -537,13 +537,13 @@
       help: "Triggers when a conversation is marked as closed in intercom",
       subtitle: "Admin closed a conversation in Intercom",
 
-      webhook_subscribe: lambda do |webhook_url, connection|
+      webhook_subscribe: lambda do |webhook_url, _connection|
         post("/subscriptions").
           payload(topics: ["conversation.admin.closed"],
-            url: webhook_url)
+                  url: webhook_url)
       end,
 
-      webhook_notification: lambda do |input, payload|
+      webhook_notification: lambda do |_input, payload|
         if payload["topic"].present? && payload["topic"] == "ping"
           nil
         else
@@ -552,7 +552,7 @@
       end,
 
       webhook_unsubscribe: lambda do |webhook|
-        delete("/subscriptions/#{webhook["id"]}")
+        delete("/subscriptions/#{webhook['id']}")
       end,
 
       dedup: lambda do |message|
@@ -570,13 +570,13 @@
       help: "Triggers when a conversation is opened in intercom",
       subtitle: "Admin opened a conversation in Intercom",
 
-      webhook_subscribe: lambda do |webhook_url, connection|
+      webhook_subscribe: lambda do |webhook_url, _connection|
         post("/subscriptions").
           payload(topics: ["conversation.admin.opened"],
                   url: webhook_url)
       end,
 
-      webhook_notification: lambda do |input, payload|
+      webhook_notification: lambda do |_input, payload|
         if payload["topic"].present? && payload["topic"] == "ping"
           nil
         else
@@ -585,7 +585,7 @@
       end,
 
       webhook_unsubscribe: lambda do |webhook|
-        delete("/subscriptions/#{webhook["id"]}")
+        delete("/subscriptions/#{webhook['id']}")
       end,
 
       dedup: lambda do |message|
@@ -599,23 +599,14 @@
   },
 
   pick_lists: {
-    sort_order: lambda do |_connection|
-      [
-        %W(#{"Created Date" } created_at),
-        %W(#{"Last Request Date" } last_request_at),
-        %W(#{"Sign Up Date" } signed_up_at),
-        %W(#{"Updated Date" } updated_at)
-      ]
-    end,
-
     segments: lambda do |_connection|
-      response = get("/segments?per_page=100")["segments"].
-        map { |segment| [segment["name"], segment["id"]] }
+      get("/segments?per_page=100")["segments"].
+      map { |segment| [segment["name"], segment["id"]] }
     end,
 
     admins: lambda do |_connection|
-      response = get("/admins")["admins"].
-        map { |admin| [admin["name"], admin["id"]] }
+      get("/admins")["admins"].
+      map { |admin| [admin["name"], admin["id"]] }
     end
   }
 }
