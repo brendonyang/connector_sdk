@@ -399,6 +399,7 @@
           { name: "body" }
         ]
       end,
+
       execute: lambda do |connection, input|
         payload = {"type": "admin",
           "message_type": "comment",
@@ -492,26 +493,27 @@
 
   triggers: {
     admin_assigned_conversation: {
-      description: "<span class='provider'>Admin Assigned</span> in <span class='provider'>Intercom</span>",
+      description: "<span class='provider'>Admin Assigned</span> in " \
+        "<span class='provider'>Intercom</span>",
       help: "Triggers when a conversation is assigned/unassigned in Intercom.",
       subtitle: "Admin assigned conversation in Intercom",
 
-      webhook_subscribe: lambda do |webhook_url, connection|
+      webhook_subscribe: lambda do |webhook_url, _connection|
         post("https://api.intercom.io/subscriptions").
           payload(topics: ["conversation.admin.assigned"],
                   url: webhook_url)
       end,
 
-      webhook_notification: lambda do |input, payload|
+      webhook_notification: lambda do |_input, payload|
         if payload["topic"].present? && payload["topic"] == "ping"
-          response = nil
+          nil
         else
-          response = payload
+          payload
         end
       end,
 
       webhook_unsubscribe: lambda do |webhook|
-        delete("https://api.intercom.io/subscriptions/#{webhook["id"]}")
+        delete("https://api.intercom.io/subscriptions/#{webhook['id']}")
       end,
 
       dedup: lambda do |message|
@@ -529,17 +531,17 @@
       help: "Triggers when a conversation is marked as closed in intercom",
       subtitle: "Admin closed a conversation in Intercom",
 
-      webhook_subscribe: lambda do |webhook_url, connection|
+      webhook_subscribe: lambda do |webhook_url, _connection|
         post("https://api.intercom.io/subscriptions").
           payload(topics: ["conversation.admin.closed"],
-            url: webhook_url)
+                  url: webhook_url)
       end,
 
-      webhook_notification: lambda do |input, payload|
+      webhook_notification: lambda do |_input, payload|
         if payload["topic"].present? && payload["topic"] == "ping"
-          response = nil
+          nil
         else
-          response = payload
+          payload
         end
       end,
 
@@ -570,9 +572,9 @@
 
       webhook_notification: lambda do |_input, payload|
         if payload["topic"].present? && payload["topic"] == "ping"
-          response = nil
+          nil
         else
-          response = payload
+          payload
         end
       end,
 
