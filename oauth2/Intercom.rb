@@ -68,8 +68,8 @@
           { name:"utm_content", label: "UTM Content" },
           { name:"utm_term", label: "UTM Term" },
           { name:"utm_medium", label: "UTM Medium" },
-          { name: "custom_attributes", type: "object", properties:
-            [
+          {
+            name: "custom_attributes", type: "object", properties: [
               { name: "phone", type: "number", control_type: "phone" },
               { name: "job_role" },
               { name: "company_size" },
@@ -154,8 +154,11 @@
           { name: "social_profiles", type: "object", properties:
             [
               { name: "type" },
-              { name: "social_profiles", type: :array, of: :object, properties:
-                [
+              {
+                name: "social_profiles",
+                type: :array,
+                of: :object,
+                properties: [
                   { name: "name" },
                   { name: "id" },
                   { name: "username" },
@@ -167,8 +170,8 @@
           { name: "companies", type: "object", properties:
             [
               { name: "type" },
-              { name: "companies", type: :array, of: :object, properties:
-                [
+              {
+                name: "companies", type: :array, of: :object, properties: [
                   { name: "id" },
                   { name: "company_id" },
                   { name: "name" }
@@ -179,19 +182,19 @@
           { name: "segments", type: "object", properties:
             [
               { name: "type" },
-              { name: "segments", type: "array", of: "object", properties:
-                [
+              {
+                name: "segments", type: "array", of: "object", properties: [
                   { name: "type" },
                   { name: "id" }
                 ]
               }
             ]
           },
-          { name: "tags", type: "object", properties:
-            [
+          {
+            name: "tags", type: "object", properties: [
               { name: "type" },
-              { name: "tags", type: "array", of: "object", properties:
-                [
+              {
+                name: "tags", type: "array", of: "object", properties: [
                   { name: "type" },
                   { name: "name" },
                   { name: "id" }
@@ -283,26 +286,26 @@
           { name: "id" },
           { name: "created_at", type: "integer" },
           { name: "updated_at", type: "integer" },
-          { name: "conversation_message", type: "object", properties:
-            [
+          {
+            name: "conversation_message", type: "object", properties: [
               { name: "id" },
               { name: "subject" },
               { name: "body" },
-              { name: "author", type: "object", properties:
-                [
+              {
+                name: "author", type: "object", properties: [
                   { name: "type" },
                   { name: "id" }
                 ]
               }
             ]
           },
-          { name: "user", type: "object", properties:
-            [
+          {
+            name: "user", type: "object", properties: [
               { name: "id" }
             ]
           },
-          { name: "assignee", type: "object", properties:
-            [
+          {
+            name: "assignee", type: "object", properties: [
               { name: "id" }
             ]
           },
@@ -372,11 +375,11 @@
       help: "Retrieves an admin in Intercom using the internal admin ID.",
 
       input_fields: lambda do |_object_definitions|
-        [ { name: "admin_id", optional: false } ]
+        [{ name: "admin_id", optional: false }]
       end,
 
-      execute: lambda do |connection, input|
-        admins = get("/admins/#{input["admin_id"]}")
+      execute: lambda do |_connection, input|
+        get("/admins/#{input['admin_id']}")
       end,
 
       output_fields: lambda do |object_definitions|
@@ -388,7 +391,8 @@
       input_fields: lambda do
         [
           { name: "conversation_id", type: "integer" },
-          { name: "admin_id", optional: false,
+          {
+            name: "admin_id", optional: false,
             label: "Admin", hint: "Select an admin in Intercom",
             control_type: "select", pick_list: "admins",
             toggle_hint: "Select from list",
@@ -399,19 +403,19 @@
               control_type: "text",
               toggle_hint: "Use custom value",
               hint: "Enter an admin ID from Intercom"
-              }
+            }
           },
           { name: "body" }
         ]
       end,
 
-      execute: lambda do |connection, input|
+      execute: lambda do |_connection, input|
         payload = { "type": "admin",
                     "message_type": "comment",
                     "admin_id": input["admin_id"],
                     "body": input["body"] }
         post("/conversations/#{input['conversation_id']}/reply", payload)
-      end,	
+      end,
 
       output_fields: lambda do |object_definitions|
         object_definitions["conversation"]
@@ -504,7 +508,7 @@
       help: "Triggers when a conversation is assigned/unassigned in Intercom.",
       subtitle: "Admin assigned conversation in Intercom",
 
-      webhook_subscribe: lambda do |webhook_url, connection|
+      webhook_subscribe: lambda do |webhook_url, _connection|
         post("/subscriptions").
           payload(topics: ["conversation.admin.assigned"],
                   url: webhook_url)
