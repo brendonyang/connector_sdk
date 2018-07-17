@@ -34,11 +34,15 @@
       apply: lambda { |_connection, access_token|
         headers("Authorization": "Bearer #{access_token}")
       }
-    }
+    },
+
+    base_uri: lambda do
+      "https://api.intercom.io"
+    end
   },
-  
-  test: ->(_connection) { get("https://api.intercom.io/users/") },
-  
+
+  test: ->(_connection) { get("/users/") },
+
   object_definitions: {
     user: {
       fields: lambda do
@@ -211,7 +215,7 @@
           { name: "plan", type: "object", properties:
             [ { name: "id" }, { name: "name" } ] },
           { name: "type" },
-          { name: "app_id" },
+          { name: "app_id" }
         ]
       end
     },
@@ -359,6 +363,7 @@
       end
     }
   },
+
   actions: {
     get_admin_by_id: {
       description: "Get <span class='provider'>Admin</span> by ID in " \
@@ -371,14 +376,14 @@
       end,
 
       execute: lambda do |connection, input|
-        admins = get("https://api.intercom.io/admins/#{input["admin_id"]}")
+        admins = get("/admins/#{input["admin_id"]}")
       end,
 
       output_fields: lambda do |object_definitions|
         object_definitions["admin"]
       end
     },
-  
+
     reply_to_conversation_as_admin: {
       input_fields: lambda do
         [
@@ -401,23 +406,23 @@
       end,
 
       execute: lambda do |connection, input|
-        payload = {"type": "admin",
-          "message_type": "comment",
-          "admin_id": input["admin_id"],
-          "body": input["body"]
-        }
-        post("https://api.intercom.io/conversations/#{input["conversation_id"]}/reply", payload)
+        payload = { "type": "admin",
+                    "message_type": "comment",
+                    "admin_id": input["admin_id"],
+                    "body": input["body"] }
+        post("/conversations/#{input['conversation_id']}/reply", payload)
       end,
 
       output_fields: lambda do |object_definitions|
         object_definitions["conversation"]
       end
     },
-  
+
     search_company: {
       input_fields: lambda do |_object_definitions|
         [
-          { name: "name", optional: false,
+          {
+            name: "name", optional: false,
             control_type: "text",
             label: "Company Name",
             hint: "Enter an company name to search for",
@@ -429,17 +434,17 @@
               control_type: "text",
               toggle_hint: "Search by company ID",
               hint: "Enter a company ID"
-              }
+            }
           }
         ]
       end,
 
-      execute: lambda do |connection, input|
+      execute: lambda do |_connection, input|
         if input["name"].present?
-          get("https://api.intercom.io/companies").
+          get("/companies").
             params(name: input["name"])
         elsif input["company_id"].present?
-          get("https://api.intercom.io/companies").
+          get("/companies").
             params(company_id: input["company_id"])
         end
       end,
@@ -448,9 +453,10 @@
         object_definitions["company"]
       end
     },
-  
+
     create_or_update_company: {
-      help: "Creates a company if Company ID doesn't exist in Intercom, and updates if it does.",
+      help: "Creates a company if Company ID doesn't exist in Intercom, " \
+        "and updates if it does.",
 
       input_fields: lambda do |_object_definitions|
         [
@@ -461,9 +467,9 @@
         ]
       end,
 
-      execute: lambda do |connection, input|
-        data = input.reject{ |k,v| v == nil }
-        post("https://api.intercom.io/companies").
+      execute: lambda do |_connection, input|
+        data = input.reject { |_k, v| v == nil }
+        post("/companies").
           payload(data)
       end,
 
@@ -473,8 +479,8 @@
     },
 
     list_admins: {
-      execute: lambda do |connection|
-        response = get("https://api.intercom.io/admins")
+      execute: lambda do |_connection|
+        response = get("/admins")
         {
           admins: response["admins"]
         }
@@ -488,7 +494,7 @@
             properties: object_definitions["admin"] }
         ]
       end
-    },
+    }
   },
 
   triggers: {
@@ -498,13 +504,13 @@
       help: "Triggers when a conversation is assigned/unassigned in Intercom.",
       subtitle: "Admin assigned conversation in Intercom",
 
-      webhook_subscribe: lambda do |webhook_url, _connection|
-        post("https://api.intercom.io/subscriptions").
+      webhook_subscribe: lambda do |webhook_url, connection|
+        post("/subscriptions").
           payload(topics: ["conversation.admin.assigned"],
                   url: webhook_url)
       end,
 
-      webhook_notification: lambda do |_input, payload|
+      webhook_notification: lambda do |input, payload|
         if payload["topic"].present? && payload["topic"] == "ping"
           nil
         else
@@ -513,7 +519,7 @@
       end,
 
       webhook_unsubscribe: lambda do |webhook|
-        delete("https://api.intercom.io/subscriptions/#{webhook['id']}")
+        delete("/subscriptions/#{webhook["id"]}")
       end,
 
       dedup: lambda do |message|
@@ -531,13 +537,13 @@
       help: "Triggers when a conversation is marked as closed in intercom",
       subtitle: "Admin closed a conversation in Intercom",
 
-      webhook_subscribe: lambda do |webhook_url, _connection|
-        post("https://api.intercom.io/subscriptions").
+      webhook_subscribe: lambda do |webhook_url, connection|
+        post("/subscriptions").
           payload(topics: ["conversation.admin.closed"],
-                  url: webhook_url)
+            url: webhook_url)
       end,
 
-      webhook_notification: lambda do |_input, payload|
+      webhook_notification: lambda do |input, payload|
         if payload["topic"].present? && payload["topic"] == "ping"
           nil
         else
@@ -546,7 +552,7 @@
       end,
 
       webhook_unsubscribe: lambda do |webhook|
-        delete("https://api.intercom.io/subscriptions/#{webhook['id']}")
+        delete("/subscriptions/#{webhook["id"]}")
       end,
 
       dedup: lambda do |message|
@@ -564,13 +570,13 @@
       help: "Triggers when a conversation is opened in intercom",
       subtitle: "Admin opened a conversation in Intercom",
 
-      webhook_subscribe: lambda do |webhook_url, _connection|
-        post("https://api.intercom.io/subscriptions").
+      webhook_subscribe: lambda do |webhook_url, connection|
+        post("/subscriptions").
           payload(topics: ["conversation.admin.opened"],
                   url: webhook_url)
       end,
 
-      webhook_notification: lambda do |_input, payload|
+      webhook_notification: lambda do |input, payload|
         if payload["topic"].present? && payload["topic"] == "ping"
           nil
         else
@@ -579,7 +585,7 @@
       end,
 
       webhook_unsubscribe: lambda do |webhook|
-        delete("https://api.intercom.io/subscriptions/#{webhook['id']}")
+        delete("/subscriptions/#{webhook["id"]}")
       end,
 
       dedup: lambda do |message|
@@ -595,20 +601,20 @@
   pick_lists: {
     sort_order: lambda do |_connection|
       [
-        %w(Created\ Date created_at),
-        %w(Last\ Request\ Date last_request_at),
-        %w(Sign\ Up\ Date signed_up_at),
-        %w(Updated\ Date updated_at)
+        %W(#{"Created Date" } created_at),
+        %W(#{"Last Request Date" } last_request_at),
+        %W(#{"Sign Up Date" } signed_up_at),
+        %W(#{"Updated Date" } updated_at)
       ]
     end,
 
     segments: lambda do |_connection|
-      get("https://api.intercom.io/segments?per_page=100")["segments"].
+      response = get("/segments?per_page=100")["segments"].
         map { |segment| [segment["name"], segment["id"]] }
     end,
 
     admins: lambda do |_connection|
-      get("https://api.intercom.io/admins")["admins"].
+      response = get("/admins")["admins"].
         map { |admin| [admin["name"], admin["id"]] }
     end
   }
