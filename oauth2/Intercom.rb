@@ -472,7 +472,7 @@
       end,
 
       execute: lambda do |_connection, input|
-        data = input.reject { |_k, v| v == nil }
+        data = input.reject { |_k, v| v.blank? }
         post("/companies").
           payload(data)
       end,
