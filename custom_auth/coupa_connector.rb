@@ -19,13 +19,13 @@
         control_type: "password",
         hint: "A key can be created from the “API Keys” section of the " \
           "Setup tab by an admin user. " \
-          "<b>eg: https://YourSubDomain.coupacloud.com/api_keys</b>",
+          "eg: <b>https://YourSubDomain.coupacloud.com/api_keys</b>",
         optional: false
       }
     ],
 
     authorization: {
-      type: "custom_auth",
+      type: "api_key",
 
       apply: lambda do |connection|
         headers("X-COUPA-API-KEY" => connection["api_key"])
