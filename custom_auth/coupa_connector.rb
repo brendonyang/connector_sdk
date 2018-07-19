@@ -187,7 +187,7 @@
         standard_field_names = address_fields.pluck(:name)
         sample_record = get("/api/addresses",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
@@ -240,7 +240,7 @@
         standard_field_names = address_fields.pluck(:name)
         sample_record = get("/api/addresses",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
@@ -344,7 +344,7 @@
         standard_field_names = address_fields.pluck(:name)
         sample_record = get("/api/addresses",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
@@ -394,11 +394,12 @@
         sample_record = get("/api/#{config_fields['object']}/#{object_id}" \
                           "/attachments",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = attachment_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -822,11 +823,12 @@
         standard_field_names = contract_fields.pluck(:name)
         sample_record = get("/api/contracts",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = contract_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -1190,11 +1192,12 @@
         standard_field_names = contract_fields.pluck(:name)
         sample_record = get("/api/contracts",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = contract_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -1616,11 +1619,12 @@
         standard_field_names = contract_fields.pluck(:name)
         sample_record = get("/api/contracts",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = contract_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -1662,12 +1666,13 @@
         standard_field_names = department_fields.pluck(:name)
         sample_record = get("/api/departments",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = department_fields.concat(custom_fields || [])
-        call("format_schema_field_names", all_fields.compact)
+
+        call("format_schema_field_names", department_fields.compact)
       end
     },
 
@@ -1758,11 +1763,12 @@
         standard_field_names = exchange_rate_fields.pluck(:name)
         sample_record = get("/api/exchange_rates",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = exchange_rate_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -1829,11 +1835,12 @@
         standard_field_names = exchange_rate_fields.pluck(:name)
         sample_record = get("/api/exchange_rates",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = exchange_rate_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -1921,11 +1928,12 @@
         standard_field_names = exchange_rate_fields.pluck(:name)
         sample_record = get("/api/exchange_rates",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = exchange_rate_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -2441,11 +2449,12 @@
         standard_field_names = expense_line_fields.pluck(:name)
         sample_record = get("/api/expense_lines",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = expense_line_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -2905,11 +2914,12 @@
         standard_field_names = expense_line_fields.pluck(:name)
         sample_record = get("/api/expense_lines",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = expense_line_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -3431,11 +3441,12 @@
         standard_field_names = expense_line_fields.pluck(:name)
         sample_record = get("/api/expense_lines",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = expense_line_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -3679,11 +3690,12 @@
         standard_field_names = expense_report_fields.pluck(:name)
         sample_record = get("/api/expense_reports",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = expense_report_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -3921,11 +3933,12 @@
         standard_field_names = expense_report_fields.pluck(:name)
         sample_record = get("/api/expense_reports",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = expense_report_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -4175,11 +4188,12 @@
         standard_field_names = expense_report_fields.pluck(:name)
         sample_record = get("/api/expense_reports",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = expense_report_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -4528,11 +4542,12 @@
         standard_field_names = inventory_transaction_fields.pluck(:name)
         sample_record = get("/api/inventory_transactions",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = inventory_transaction_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -4803,11 +4818,12 @@
         standard_field_names = inventory_transaction_fields.pluck(:name)
         sample_record = get("/api/inventory_transactions",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = inventory_transaction_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -6266,11 +6282,12 @@
         standard_field_names = invoice_fields.pluck(:name)
         sample_record = get("/api/invoices",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = invoice_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -8363,11 +8380,12 @@
         standard_field_names = invoice_fields.pluck(:name)
         sample_record = get("/api/invoices",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = invoice_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -9899,11 +9917,12 @@
         standard_field_names = invoice_fields.pluck(:name)
         sample_record = get("/api/invoices",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = invoice_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -10145,11 +10164,12 @@
         standard_field_names = item_fields.pluck(:name)
         sample_record = get("/api/items",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = item_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -10381,11 +10401,12 @@
         standard_field_names = item_fields.pluck(:name)
         sample_record = get("/api/items",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = item_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -10503,11 +10524,12 @@
         standard_field_names = lookup_value_fields.pluck(:name)
         sample_record = get("/api/lookup_values",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = lookup_value_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -10603,11 +10625,12 @@
         standard_field_names = lookup_value_fields.pluck(:name)
         sample_record = get("/api/lookup_values",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = lookup_value_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -10724,11 +10747,12 @@
         standard_field_names = lookup_value_fields.pluck(:name)
         sample_record = get("/api/lookup_values",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = lookup_value_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -11418,11 +11442,12 @@
         standard_field_names = purchase_order_fields.pluck(:name)
         sample_record = get("/api/purchase_orders",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = purchase_order_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -11678,11 +11703,12 @@
         standard_field_names = purchase_order_fields.pluck(:name)
         sample_record = get("/api/purchase_orders",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = purchase_order_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -12383,11 +12409,12 @@
         standard_field_names = purchase_order_fields.pluck(:name)
         sample_record = get("/api/purchase_orders",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = purchase_order_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -12781,11 +12808,12 @@
         standard_field_names = purchase_order_line_fields.pluck(:name)
         sample_record = get("/api/purchase_order_lines",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = purchase_order_line_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -12889,7 +12917,7 @@
         sample_record = get("/api/#{config_fields['object']}/#{object_id}" \
                            "/addresses",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
@@ -12940,7 +12968,7 @@
         sample_record = get("/api/#{config_fields['object']}" \
                             "/#{config_fields['object_id']}/addresses",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
@@ -13045,7 +13073,7 @@
         sample_record = get("/api/#{config_fields['object']}/#{object_id}" \
                            "/addresses",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
@@ -13564,11 +13592,12 @@
         standard_field_names = supplier_fields.pluck(:name)
         sample_record = get("/api/suppliers",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = supplier_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -14011,11 +14040,12 @@
         standard_field_names = supplier_fields.pluck(:name)
         sample_record = get("/api/suppliers",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = supplier_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -14537,11 +14567,12 @@
         standard_field_names = supplier_fields.pluck(:name)
         sample_record = get("/api/suppliers",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = supplier_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -14982,11 +15013,12 @@
         standard_field_names = supplier_info_fields.pluck(:name)
         sample_record = get("/api/supplier_information",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = supplier_info_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -15275,11 +15307,12 @@
         standard_field_names = supplier_item_fields.pluck(:name)
         sample_record = get("/api/supplier_items",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = supplier_item_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -15516,11 +15549,12 @@
         standard_field_names = supplier_item_fields.pluck(:name)
         sample_record = get("/api/supplier_items",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = supplier_item_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -15805,11 +15839,12 @@
         standard_field_names = supplier_item_fields.pluck(:name)
         sample_record = get("/api/supplier_items",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = supplier_item_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -16005,11 +16040,12 @@
         sample_record = get("/api/suppliers" \
                             "/#{config_fields['supplier']}/supplier_sites",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
         all_fields = supplier_site_fields.concat(custom_fields || [])
+
         call("format_schema_field_names", all_fields.compact)
       end
     },
@@ -16191,7 +16227,7 @@
         sample_record = get("/api/suppliers" \
                             "/#{config_fields['supplier']}/supplier_sites",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
@@ -16399,7 +16435,7 @@
         sample_record = get("/api/suppliers" \
                             "/#{config_fields['supplier']}/supplier_sites",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
@@ -17018,7 +17054,7 @@
         standard_field_names = user_fields.pluck(:name)
         sample_record = get("/api/users",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
@@ -17422,7 +17458,7 @@
         standard_field_names = user_fields.pluck(:name)
         sample_record = get("/api/users",
                             return_object: "shallow",
-                            limit: 1)[0]
+                            limit: 1)&.[](0)
         custom_fields = sample_record&.map do |key, _|
                           { name: key } unless standard_field_names.include? key
                         end&.compact
@@ -17491,7 +17527,7 @@
       end,
 
       sample_output: lambda do |_connection, _input|
-        get("/api/addresses", return_object: "shallow", limit: 1)[0] || {}
+        get("/api/addresses", return_object: "shallow", limit: 1)&.[](0) || {}
       end
     },
 
@@ -17515,7 +17551,7 @@
       end,
 
       sample_output: lambda do |_connection, _input|
-        get("/api/addresses", return_object: "shallow", limit: 1)[0] || {}
+        get("/api/addresses", return_object: "shallow", limit: 1)&.[](0) || {}
       end
     },
 
@@ -17541,7 +17577,7 @@
       end,
 
       sample_output: lambda do |_connection, _input|
-        get("/api/addresses", return_object: "shallow", limit: 1)[0] || {}
+        get("/api/addresses", return_object: "shallow", limit: 1)&.[](0) || {}
       end
     },
 
@@ -17663,7 +17699,7 @@
         call("format_api_output_field_names",
              get("/api/contracts",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -17700,7 +17736,7 @@
         call("format_api_output_field_names",
              get("/api/contracts",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -17737,7 +17773,7 @@
         call("format_api_output_field_names",
              get("/api/contracts",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -17805,7 +17841,7 @@
         call("format_api_output_field_names",
              get("/api/departments",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -17835,7 +17871,7 @@
         call("format_api_output_field_names",
              get("/api/departments",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -17866,7 +17902,7 @@
         call("format_api_output_field_names",
              get("/api/departments",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -17935,7 +17971,7 @@
         call("format_api_output_field_names",
              get("/api/exchange_rates",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -17965,7 +18001,7 @@
         call("format_api_output_field_names",
              get("/api/exchange_rates",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -17996,7 +18032,7 @@
         call("format_api_output_field_names",
              get("/api/exchange_rates",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18091,7 +18127,7 @@
         call("format_api_output_field_names",
              get("/api/expense_lines",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18132,7 +18168,7 @@
         call("format_api_output_field_names",
              get("/api/expense_lines",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18174,7 +18210,7 @@
         call("format_api_output_field_names",
              get("/api/expense_lines",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18235,7 +18271,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/expense_reports", limit: 1)[0]) || {}
+             get("/api/expense_reports", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18266,7 +18302,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/expense_reports", limit: 1)[0]) || {}
+             get("/api/expense_reports", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18299,7 +18335,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/expense_reports", limit: 1)[0]) || {}
+             get("/api/expense_reports", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18373,7 +18409,7 @@
         call("format_api_output_field_names",
              get("/api/inventory_transactions",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18410,7 +18446,7 @@
         call("format_api_output_field_names",
              get("/api/inventory_transactions",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18474,7 +18510,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/invoices", limit: 1)[0]) || {}
+             get("/api/invoices", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18533,7 +18569,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/invoices", limit: 1)[0]) || {}
+             get("/api/invoices", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18577,7 +18613,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/invoices", limit: 1)[0]) || {}
+             get("/api/invoices", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18649,7 +18685,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/items", return_object: "shallow", limit: 1)[0]) || {}
+             get("/api/items", return_object: "shallow", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18681,7 +18717,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/items", return_object: "shallow", limit: 1)[0]) || {}
+             get("/api/items", return_object: "shallow", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18714,7 +18750,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/items", return_object: "shallow", limit: 1)[0]) || {}
+             get("/api/items", return_object: "shallow", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18783,7 +18819,7 @@
         call("format_api_output_field_names",
              get("/api/lookup_values",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18814,7 +18850,7 @@
         call("format_api_output_field_names",
              get("/api/lookup_values",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18846,7 +18882,7 @@
         call("format_api_output_field_names",
              get("/api/lookup_values",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18914,7 +18950,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/purchase_orders", limit: 1)[0]) || {}
+             get("/api/purchase_orders", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18941,7 +18977,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/purchase_orders", limit: 1)[0]) || {}
+             get("/api/purchase_orders", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -18968,7 +19004,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/purchase_orders", limit: 1)[0]) || {}
+             get("/api/purchase_orders", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19003,7 +19039,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/purchase_orders", limit: 1)[0]) || {}
+             get("/api/purchase_orders", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19036,7 +19072,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/purchase_orders", limit: 1)[0]) || {}
+             get("/api/purchase_orders", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19106,7 +19142,7 @@
         call("format_api_output_field_names",
              get("/api/purchase_order_lines",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19201,7 +19237,7 @@
       sample_output: lambda do |_connection, input|
         get("/api/#{input['object']}/#{input['object_id']}/addresses",
             return_object: "shallow",
-            limit: 1)[0] || {}
+            limit: 1)&.[](0) || {}
       end
     },
 
@@ -19247,7 +19283,7 @@
       sample_output: lambda do |_connection, input|
         get("/api/#{input['object']}/#{input['object_id']}/addresses",
             return_object: "shallow",
-            limit: 1)[0] || {}
+            limit: 1)&.[](0) || {}
       end
     },
 
@@ -19321,7 +19357,7 @@
         call("format_api_output_field_names",
              get("/api/suppliers",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19391,7 +19427,7 @@
         call("format_api_output_field_names",
              get("/api/suppliers",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19426,7 +19462,7 @@
         call("format_api_output_field_names",
              get("/api/suppliers",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19496,7 +19532,7 @@
         call("format_api_output_field_names",
              get("/api/supplier_information",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19564,7 +19600,7 @@
         call("format_api_output_field_names",
              get("/api/supplier_items",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19595,7 +19631,7 @@
         call("format_api_output_field_names",
              get("/api/supplier_items",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19626,7 +19662,7 @@
         call("format_api_output_field_names",
              get("/api/supplier_items",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19760,7 +19796,7 @@
         call("format_api_output_field_names",
              get("/api/suppliers/#{input['supplier']}/supplier_sites",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19809,7 +19845,7 @@
         call("format_api_output_field_names",
              get("/api/suppliers/#{input['supplier']}/supplier_sites",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19884,7 +19920,7 @@
         call("format_api_output_field_names",
              get("/api/users",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19919,7 +19955,7 @@
         call("format_api_output_field_names",
              get("/api/users",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -19957,7 +19993,7 @@
         call("format_api_output_field_names",
              get("/api/users",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     }
   },
@@ -19981,9 +20017,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure[0] ||  0
+        offset = closure&.[](0) ||  0
         page_size = 50 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = call("format_api_output_field_names",
                         get("/api/inventory_transactions",
@@ -20015,7 +20051,7 @@
         call("format_api_output_field_names",
              get("/api/inventory_transactions",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -20038,9 +20074,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure[0] ||  0
+        offset = closure&.[](0) ||  0
         page_size = 50 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = get("/api/addresses",
                        "return_object": "shallow",
@@ -20066,7 +20102,7 @@
       end,
 
       sample_output: lambda do |_connection, _input|
-        get("/api/addresses", return_object: "shallow", limit: 1)[0] || {}
+        get("/api/addresses", return_object: "shallow", limit: 1)&.[](0) || {}
       end
     },
 
@@ -20089,9 +20125,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure.present? ? closure.first : 0
+        offset = closure&.[](0) ||  0
         page_size = 50 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = call("format_api_output_field_names",
                         get("/api/contracts",
@@ -20121,7 +20157,7 @@
         call("format_api_output_field_names",
              get("/api/contracts",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -20143,9 +20179,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure[0] ||  0
+        offset = closure&.[](0) ||  0
         page_size = 50 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = call("format_api_output_field_names",
                         get("/api/departments",
@@ -20175,7 +20211,7 @@
         call("format_api_output_field_names",
              get("/api/departments",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -20198,9 +20234,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure[0] ||  0
+        offset = closure&.[](0) ||  0
         page_size = 50 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = call("format_api_output_field_names",
                         get("/api/exchange_rates",
@@ -20231,7 +20267,7 @@
         call("format_api_output_field_names",
              get("/api/exchange_rates",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -20254,9 +20290,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure[0] ||  0
+        offset = closure&.[](0) ||  0
         page_size = 10 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = call("format_api_output_field_names",
                         get("/api/expense_reports",
@@ -20283,7 +20319,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/expense_reports", limit: 1)[0]) || {}
+             get("/api/expense_reports", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -20306,9 +20342,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure[0] ||  0
+        offset = closure&.[](0) ||  0
         page_size = 10 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = call("format_api_output_field_names",
                         get("/api/invoices",
@@ -20333,7 +20369,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/invoices", limit: 1)[0]) || {}
+             get("/api/invoices", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -20356,9 +20392,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure[0] ||  0
+        offset = closure&.[](0) ||  0
         page_size = 50 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = call("format_api_output_field_names",
                         get("/api/lookup_values",
@@ -20388,7 +20424,7 @@
         call("format_api_output_field_names",
              get("/api/lookup_values",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -20411,9 +20447,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure[0] ||  0
+        offset = closure&.[](0) ||  0
         page_size = 10 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = call("format_api_output_field_names",
                         get("/api/purchase_orders",
@@ -20442,7 +20478,7 @@
 
       sample_output: lambda do |_connection, _input|
         call("format_api_output_field_names",
-             get("/api/purchase_orders", limit: 1)[0]) || {}
+             get("/api/purchase_orders", limit: 1)&.[](0)) || {}
       end
     },
 
@@ -20481,9 +20517,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure[0] ||  0
+        offset = closure&.[](0) ||  0
         page_size = 50 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = get("/api/#{input['object']}/#{input['object_id']}" \
                      "/addresses",
@@ -20513,7 +20549,7 @@
         get("/api/#{input['object']}/#{input['object_id']}" \
           "/addresses",
             return_object: "shallow",
-            limit: 1)[0] || {}
+            limit: 1)&.[](0) || {}
       end
     },
 
@@ -20536,9 +20572,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure[0] ||  0
+        offset = closure&.[](0) ||  0
         page_size = 50 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = call("format_api_output_field_names",
                         get("/api/suppliers",
@@ -20571,7 +20607,7 @@
         call("format_api_output_field_names",
              get("/api/suppliers",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -20594,9 +20630,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure[0] ||  0
+        offset = closure&.[](0) ||  0
         page_size = 50 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = call("format_api_output_field_names",
                         get("/api/supplier_information",
@@ -20626,7 +20662,7 @@
         call("format_api_output_field_names",
              get("/api/supplier_information",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -20649,9 +20685,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure[0] ||  0
+        offset = closure&.[](0) ||  0
         page_size = 50 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = call("format_api_output_field_names",
                         get("/api/supplier_items",
@@ -20681,7 +20717,7 @@
         call("format_api_output_field_names",
              get("/api/supplier_items",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -20720,9 +20756,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure[0] ||  0
+        offset = closure&.[](0) ||  0
         page_size = 50 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = call("format_api_output_field_names",
                         get("/api/suppliers/#{input['supplier']}" \
@@ -20753,7 +20789,7 @@
         call("format_api_output_field_names",
              get("/api/suppliers/#{input['supplier']}/supplier_sites",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
 
@@ -20776,9 +20812,9 @@
       end,
 
       poll: lambda do |_connection, input, closure|
-        offset = closure[0] ||  0
+        offset = closure&.[](0) ||  0
         page_size = 50 # max is 50 for page_size in Coupa
-        updated_since = (closure&.last || input["since"] || 1.hour.ago).
+        updated_since = (closure&.[](1) || input["since"] || 1.hour.ago).
                         to_time.utc.iso8601
         response = call("format_api_output_field_names",
                         get("/api/users",
@@ -20809,7 +20845,7 @@
         call("format_api_output_field_names",
              get("/api/users",
                  return_object: "shallow",
-                 limit: 1)[0]) || {}
+                 limit: 1)&.[](0)) || {}
       end
     },
   },
