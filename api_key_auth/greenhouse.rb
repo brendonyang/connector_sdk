@@ -816,7 +816,7 @@
                 control_type: "text",
                 optional: !field["required"],
                 toggle_hint: "User Custom Value",
-            } }
+              } }
           when "date"
             { name: field["name_key"], type: "date", control_type: "date",
               label: field["name"], optional: !field["required"] }
@@ -841,7 +841,7 @@
                 control_type: "text",
                 optional: !field["required"],
                 toggle_hint: "User Custom Value",
-            } }
+              } }
           when "multi_select"
             multiselect_values = field["custom_field_options"].map do |ob|
               [ob["name"], ob["name"]]
@@ -859,15 +859,14 @@
                 control_type: "text",
                 optional: !field["required"],
                 toggle_hint: "User Custom Value",
-            } }
+              } }
           else
             { name: field["name_key"], type: "string", control_type: "text",
               label: field["name"], optional: !field["required"] }
           end
         end
 
-        application_fields = standard_fields.
-          concat(custom_fields || []).compact
+        standard_fields.concat(custom_fields || []).compact
       end
     },
 
@@ -883,7 +882,7 @@
           { name: "disabled", type: "boolean", control_type: "checkbox" },
           { name: "site_admin", type: "boolean", control_type: "checkbox" },
           { name: "emails", type: "array", of: "string",
-           control_type: "email" },
+            control_type: "email" },
           { name: "employee_id" }
         ]
       end
@@ -969,7 +968,7 @@
                 { name: "name" },
                 { name: "employee_id" }
               ] }
-          ] },
+            ] },
           { name: "activities", type: "array", of: "object", properties: [
             { name: "id", type: "integer", control_type: "number" },
             { name: "created_at", type: "date_time",
@@ -989,9 +988,9 @@
     }
   },
 
-  test: ->(_connection) {
+  test: lambda do |_connection| 
     get("/v1/users").params(per_page: 1)
-  },
+  end,
 
   methods: {
     on_behalf_of: lambda { |input|
@@ -1011,7 +1010,7 @@
 
       input_fields: lambda do |_object_definitions|
         [
-        # Check job id?
+          # Check job id?
           { name: "job_id", type: "integer", control_type: "number",
             hint: "If supplied, returns only candidates that have applied " \
               "to this job. Returns both when a candidate has applied to " \
