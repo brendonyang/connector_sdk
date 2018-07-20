@@ -78,7 +78,7 @@
                 type: :string,
                 control_type: "text",
                 optional: false,
-                toggle_hint: "User Custom Value"
+                toggle_hint: "Use custom value"
               } }
           when "multi_select"
             multiselect_values = field["custom_field_options"].map do |ob|
@@ -96,7 +96,7 @@
                 type: :string,
                 control_type: "text",
                 optional: !field["required"],
-                toggle_hint: "User Custom Value"
+                toggle_hint: "Use custom value"
               } }
           else
             { name: field["name_key"], type: "string", control_type: "text",
@@ -342,8 +342,8 @@
                 type: :string,
                 control_type: "text",
                 optional: false,
-                toggle_hint: "User Custom Value"
-            } }
+                toggle_hint: "Use custom value"
+              } }
           when "multi_select"
             multiselect_values = field["custom_field_options"].map do |ob|
               [ob["name"], ob["name"]]
@@ -360,7 +360,7 @@
                 type: :string,
                 control_type: "text",
                 optional: !field["required"],
-                toggle_hint: "User Custom Value"
+                toggle_hint: "Use custom value"
               } }
           else
             { name: field["name_key"], type: "string", control_type: "text",
@@ -526,7 +526,7 @@
                 type: :string,
                 control_type: "text",
                 optional: !field["required"],
-                toggle_hint: "User Custom Value",
+                toggle_hint: "Use custom value"
               } }
           when "date"
             { name: field["name_key"], type: "date", control_type: "date",
@@ -551,7 +551,7 @@
                 type: :string,
                 control_type: "text",
                 optional: !field["required"],
-                toggle_hint: "User Custom Value",
+                toggle_hint: "Use custom value"
               } }
           when "multi_select"
             multiselect_values = field["custom_field_options"].map do |ob|
@@ -570,7 +570,7 @@
                 type: :string,
                 control_type: "text",
                 optional: !field["required"],
-                toggle_hint: "User Custom Value",
+                toggle_hint: "Use custom value"
               } }
           else
             { name: field["name_key"], type: "string", control_type: "text",
@@ -718,7 +718,7 @@
               type: :string,
               control_type: "text",
               optional: true,
-              toggle_hint: "User Custom Value"
+              toggle_hint: "Use custom value"
             } },
           { name: "applied_at", type: "date_time", control_type: "date_time" },
           { name: "rejected_at", type: "date_time",
@@ -843,7 +843,7 @@
                 type: :string,
                 control_type: "text",
                 optional: !field["required"],
-                toggle_hint: "User Custom Value"
+                toggle_hint: "Use custom value"
               } }
           when "multi_select"
             multiselect_values = field["custom_field_options"].map do |ob|
@@ -861,7 +861,7 @@
                 type: :string,
                 control_type: "text",
                 optional: !field["required"],
-                toggle_hint: "User Custom Value"
+                toggle_hint: "Use custom value"
               } }
           else
             { name: field["name_key"], type: "string", control_type: "text",
@@ -1167,7 +1167,7 @@
                 type: :string,
                 control_type: "text",
                 optional: true,
-                toggle_hint: "User Custom Value"
+                toggle_hint: "Use custom value"
               } },
             { name: "value" }
           ] },
@@ -1248,7 +1248,7 @@
               type: :string,
               control_type: "text",
               optional: true,
-              toggle_hint: "User Custom Value",
+              toggle_hint: "Use custom value",
               hint: "Possible values: active, converted, hired, and " \
                 "rejected. If anything else is used, an empty response" \
                 " will be returned rather than an error."
