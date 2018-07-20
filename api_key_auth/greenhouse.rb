@@ -1452,12 +1452,12 @@
           { name: "from" },
           { name: "cc", type: "array", of: "string" },
           { name: "user", type: "object", properties: [
-              { name: "id", label: "User ID", type: "integer" },
-              { name: "first_name" },
-              { name: "last_name" },
-              { name: "name" },
-              { name: "employee_id" }
-            ] }
+            { name: "id", label: "User ID", type: "integer" },
+            { name: "first_name" },
+            { name: "last_name" },
+            { name: "name" },
+            { name: "employee_id" }
+          ] }
         ]
       end
     },
@@ -1471,9 +1471,9 @@
         [
           { name: "id", label: "Candidate ID", type: "integer",
             optional: false,
-            control_type: "number" },
-        ].concat(object_definitions["add_education"].required("school_id",
-        "discipline_id","degree_id","start_date","end_date"))
+            control_type: "number" }
+        ].concat(object_definitions["add_education"].
+        required("school_id", "discipline_id", "degree_id", "start_date", "end_date"))
       end,
 
       execute: lambda do |connection, input|
