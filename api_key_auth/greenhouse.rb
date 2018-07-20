@@ -698,9 +698,9 @@
               { name: "job_id", optional: false, type: "integer",
                 control_type: "number" }
             ] },
-          { name: "custom_fields", type: "object", properties: custom_fields  }
+          { name: "custom_fields", type: "object", properties: custom_fields }
           # Custom_fields[]
-        ]      
+        ]
         standard_fields
       end
     },
@@ -796,8 +796,8 @@
 
         custom_fields = get("/v1/custom_fields/application").select { |e|
           e["field_type"] == "application" &&
-          e["private"] == false &&
-          e["active"] == true }.
+            e["private"] == false &&
+              e["active"] == true }.
                         map do |field|
           type = field["value_type"]
           case type
