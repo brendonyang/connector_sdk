@@ -78,8 +78,8 @@
                 type: :string,
                 control_type: "text",
                 optional: false,
-                toggle_hint: "User Custom Value",
-            } }
+                toggle_hint: "User Custom Value"
+              } }
           when "multi_select"
             multiselect_values = field["custom_field_options"].map do |ob|
               [ob["name"], ob["name"]]
@@ -96,7 +96,7 @@
                 type: :string,
                 control_type: "text",
                 optional: !field["required"],
-                toggle_hint: "User Custom Value",
+                toggle_hint: "User Custom Value"
               } }
           else
             { name: field["name_key"], type: "string", control_type: "text",
@@ -131,7 +131,8 @@
                 label: "type",
                 type: "string",
                 control_type: "text",
-                toggle_hint: "Use custom value" } }
+                toggle_hint: "Use custom value"
+              } }
           ] },
           { name: "application_ids", type: "array", of: "integer",
             properties: [],
@@ -526,7 +527,7 @@
                 control_type: "text",
                 optional: !field["required"],
                 toggle_hint: "User Custom Value",
-            } }
+              } }
           when "date"
             { name: field["name_key"], type: "date", control_type: "date",
               label: field["name"], optional: !field["required"] }
