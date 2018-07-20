@@ -1263,8 +1263,8 @@
       end,
 
       output_fields: lambda do |object_definitions|
-        [ { name: "applications", type: "array", of: "object",
-          properties: object_definitions["application"] } ]
+        [{ name: "applications", type: "array", of: "object",
+           properties: object_definitions["application"] }]
       end
     },
 
@@ -1292,11 +1292,11 @@
           { name: "updated_before",
             type: "date_time", control_type: "date_time" },
           { name: "updated_after",
-            type: "date_time", control_type: "date_time" },
+            type: "date_time", control_type: "date_time" }
         ]
       end,
 
-      execute: lambda do |connection, input|
+      execute: lambda do |_connection, input|
         error("Provide at least one search criteria") if input.blank?
         users = get("/v1/users", input)
         {
@@ -1309,7 +1309,7 @@
           { name: "users", type: "array", of: "object",
             properties: object_definitions["user"] }
         ]
-      end      
+      end
     },
 
     create_user: {
@@ -1317,7 +1317,7 @@
         "<span class='provider'>Greenhouse</span>",
       title: "Create user in Greenhouse",
 
-      input_fields: lambda do |object_definitions|
+      input_fields: lambda do |_object_definitions|
         [
           { name: "first_name", optional: false },
           { name: "last_name", optional: false },
@@ -1334,7 +1334,7 @@
         on_behalf_of = (get("/v1/users").
                           params(per_page: 1,
                                  email: connection["usermail"]) || {})["id"]
-        candidate = post("/v1/users").
+        post("/v1/users").
           headers("On-Behalf-Of": on_behalf_of).payload(input)
       end,
 
