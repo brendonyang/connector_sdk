@@ -754,9 +754,9 @@
           ]},
           { name: "status", control_type: "select",
             pick_list: [
-              %w(Active active),
-              %w(Rejected rejected),
-              %w(Hired hired)
+              %w[Active active],
+              %w[Rejected rejected],
+              %w[Hired hired]
             ],
             toggle_hint: "Select from list",
             toggle_field: {
@@ -1154,9 +1154,9 @@
           { name: "referrer", type: "object", properties: [
             { name: "type", label: "Type", control_type: :select, pick_list:
               [
-                %w(ID id),
-                %w(Email email),
-                %w(Outside outside)
+                %w[ID id],
+                %w[Email email],
+                %w[Outside outside]
               ],
               optional: true, toggle_hint: "Select from list",
               toggle_field: {
@@ -1175,9 +1175,9 @@
                 "e.g. resume.pdf" },
             { name: "type", label: "Type", control_type: :select, pick_list:
               [
-                %w(Resume resume),
-                %w(Cover\ letter cover_letter),
-                %w(Admin\ only admin_only)
+                %w[Resume resume],
+                %w[Cover\ letter cover_letter],
+                %w[Admin\ only admin_only]
               ],
               optional: false, toggle_hint: "Select from list",
               toggle_field: {
@@ -1234,10 +1234,10 @@
             hint: "Timestamp must be in in ISO-8601 format" },
           { name: "status", control_type: "select", picklist:
             [
-              %w(Active active),
-              %w(Converted converted),
-              %w(Rejected rejected),
-              %w(Hired hired)
+              %w[Active active],
+              %w[Converted converted],
+              %w[Rejected rejected],
+              %w[Hired hired]
             ],
             toggle_hint: "Select from list",
             toggle_field: {
@@ -1361,9 +1361,9 @@
             hint: "Note body" },
           { name: "visibility", control_type: "select", pick_list:
             [
-              %w(Admin\ only admin_only),
-              %w(Private private),
-              %w(Public public)
+              %w[Admin\ only admin_only],
+              %w[Private private],
+              %w[Public public]
             ],
             optional: false,
             toggle_hint: "Select from list",
@@ -1686,56 +1686,56 @@
   pick_lists: {
     phone_type: lambda do
       [
-        %w(Home home),
-        %w(Work work),
-        %w(Mobile mobile),
-        %w(Skype skype),
-        %w(Other other)
+        %w[Home home],
+        %w[Work work],
+        %w[Mobile mobile],
+        %w[Skype skype],
+        %w[Other other]
       ]
     end,
 
     address_type: lambda do
       [
-        %w(Home home),
-        %w(Work work),
-        %w(Other other)
+        %w[Home home],
+        %w[Work work],
+        %w[Other other]
       ]
     end,
 
     email_type: lambda do
       [
-        %w(Personal personal),
-        %w(Work work),
-        %w(Other other)
+        %w[Personal personal],
+        %w[Work work],
+        %w[Other other]
       ]
     end,
 
     website_type: lambda do
       [
-        %w(Personal personal),
-        %w(Company company),
-        %w(Portfolio portfolio),
-        %w(Blog blog),
-        %w(Other other)
+        %w[Personal personal],
+        %w[Company company],
+        %w[Portfolio portfolio],
+        %w[Blog blog],
+        %w[Other other]
       ]
     end,
 
     attachments_type: lambda do
       [
-        %w(Admin\ only admin_only),
-        %w(Public public),
-        %w(Cover\ letter cover_letter),
-        %w(Offer\ packet offer_packet),
-        %w(Resume resume),
-        %w(Take\ home\ test take_home_test)
+        %w[Admin\ only admin_only],
+        %w[Public public],
+        %w[Cover\ letter cover_letter],
+        %w[Offer\ packet offer_packet],
+        %w[Resume resume],
+        %w[Take\ home\ test take_home_test]
       ]
     end,
 
     referrer_type: lambda do
       [
-        %w(ID id),
-        %w(Email email),
-        %w(Outside outside)
+        %w[ID id],
+        %w[Email email],
+        %w[Outside outside]
       ]
     end
   }
