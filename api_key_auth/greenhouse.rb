@@ -97,7 +97,7 @@
                 control_type: "text",
                 optional: !field["required"],
                 toggle_hint: "User Custom Value",
-            } }
+              } }
           else
             { name: field["name_key"], type: "string", control_type: "text",
               label: field["name"], optional: !field["required"] }
