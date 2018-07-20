@@ -243,7 +243,7 @@
                 { name: "name" }
               ] }
             ] },
-            #Rejection details
+            # Rejection details
             { name: "jobs", type: "array", of: "object", properties: [
               { name: "id", type: "integer", control_type: "number" },
               { name: "name" }
@@ -270,7 +270,7 @@
                 { name: "id", type: "integer", control_type: "number" },
                 { name: "name" }
               ] }
-              #Custom_fields, keyed custom fields (prospect endpoint) missing.
+              # Custom_fields, keyed custom fields (prospect endpoint) missing.
             ] }
           ] },
           { name: "educations", type: "array", of: "object", properties: [
@@ -292,7 +292,7 @@
             { name: "end_date", type: "date_time", control_type: "date_time" }
           ]},
           { name: "custom_fields", type: "object", properties: custom_fields }
-          #Keyed custom fields
+          # Keyed custom fields
         ]
         standard_fields
       end
@@ -698,7 +698,7 @@
                 control_type: "number" }
           ]},
           { name: "custom_fields", type: "object", properties: custom_fields  }
-          #Custom_fields[]
+          # Custom_fields[]
         ]      
         standard_fields
       end
@@ -747,7 +747,7 @@
               { name: "name" }
               ] }
           ] },
-          #Rejection details
+          # Rejection details
           { name: "jobs", type: "array", of: "object", properties: [
             { name: "id", type: "integer", control_type: "number" },
             { name: "name" }
@@ -789,8 +789,8 @@
               { name: "name" }
             ] }
           ] }
-          #Custom Field,
-          #Keyed_custom_fields
+          # Custom Field
+          # Keyed_custom_fields
         ]
 
         custom_fields = get("/v1/custom_fields/application").select{
@@ -1011,7 +1011,7 @@
 
       input_fields: lambda do |object_definitions|
         [
-        #Check job id?
+        # Check job id?
           { name: "job_id", type: "integer", control_type: "number",
             hint: "If supplied, returns only candidates that have applied " \
               "to this job. Returns both when a candidate has applied to " \
@@ -1393,16 +1393,16 @@
           { name: "created_at", type: "date_time" },
           { name: "body" },
           { name: "user", type: "object", properties: [
-              { name: "id", type: "integer", control_type: "number",
-                label: "User ID" },
-              { name: "first_name" },
-              { name: "last_name" },
-              { name: "name" },
-              #Check employee ID
-              { name: "employee_id" }
-            ] },
+            { name: "id", type: "integer", control_type: "number",
+              label: "User ID" },
+            { name: "first_name" },
+            { name: "last_name" },
+            { name: "name" },
+            # Check employee ID
+            { name: "employee_id" }
+          ] },
           { name: "private", type: "boolean" },
-          { name: "visiblity" },
+          { name: "visiblity" }
         ]
       end
     },
@@ -1430,7 +1430,7 @@
             hint: "The subject line of the e-mail." },
           { name: "body", type: "string", control_type: "text-area",
             optional: false,
-            hint: "The body of the e-mail." },
+            hint: "The body of the e-mail." }
         ]
       end,
 
@@ -1473,7 +1473,8 @@
             optional: false,
             control_type: "number" }
         ].concat(object_definitions["add_education"].
-        required("school_id", "discipline_id", "degree_id", "start_date", "end_date"))
+        required("school_id", "discipline_id", "degree_id",
+                 "start_date", "end_date"))
       end,
 
       execute: lambda do |connection, input|
@@ -1499,9 +1500,9 @@
         [
           { name: "id", label: "Candidate ID", type: "integer",
             optional: false,
-            control_type: "number" },
-        ].concat(object_definitions["employment"].required("company_name",
-          "title", "start_date").ignored("id"))
+            control_type: "number" }
+        ].concat(object_definitions["employment"].
+        required("company_name", "title", "start_date").ignored("id"))
       end,
 
       execute: lambda do |connection, input|
@@ -1627,7 +1628,7 @@
         ]
       end,
 
-      execute: lambda do |connection, input|
+      execute: lambda do |_connection, input|
         get("/v1/candidates/" + input["id"] + "/activity_feed")
       end,
 
@@ -1644,7 +1645,7 @@
       title: "New or updated candidate in Greenhouse",
       help: "Triggers when candidates is created/updated.",
 
-      input_fields: lambda do |variable|
+      input_fields: lambda do |_object_definitions|
         [
           {
             name: "since", type: :date_time,
