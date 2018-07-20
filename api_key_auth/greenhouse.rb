@@ -989,7 +989,7 @@
     }
   },
 
-  test: ->(connection) {
+  test: ->(_connection) {
     get("/v1/users").params(per_page: 1)
   },
 
@@ -1009,7 +1009,7 @@
       help: "Fetches a list of candidates that matches the search criteria." \
         "Returns a maximum of 100 records.",
 
-      input_fields: lambda do |object_definitions|
+      input_fields: lambda do |_object_definitions|
         [
         # Check job id?
           { name: "job_id", type: "integer", control_type: "number",
@@ -1033,11 +1033,11 @@
             hint: "Timestamp must be in in ISO-8601 format" },
           { name: "updated_after",
             type: "date_time", control_type: "date_time",
-            hint: "Timestamp must be in in ISO-8601 format" },
+            hint: "Timestamp must be in in ISO-8601 format" }
         ]
       end,
 
-      execute: lambda do |connection, input|
+      execute: lambda do |_connection, input|
         error("Provide at least one search criteria") if input.blank?
         {
           candidates: get("/v1/candidates", input)
@@ -1056,14 +1056,14 @@
       title: "Get candidate details by ID in Greenhouse",
       help: "Returns information about a candidate.",
 
-      input_fields: lambda do |object_definitions|
+      input_fields: lambda do |_object_definitions|
         [
           { name: "id", optional: false, type: "integer",
-            control_type: "number", label: "Candidate ID" },
+            control_type: "number", label: "Candidate ID" }
         ]
       end,
 
-      execute: lambda do |connection, input|
+      execute: lambda do |_connection, input|
         get("/v1/candidates/" + input["id"])
       end,
 
@@ -1100,7 +1100,7 @@
           end
         end.inject(:merge)
 
-        candidate = post("/v1/candidates").
+        post("/v1/candidates").
           headers("On-Behalf-Of": on_behalf_of).payload(params)
       end,
 
@@ -1123,7 +1123,7 @@
       end,
 
       execute: lambda do |connection, input|
-        candidate = patch("/v1/candidates/" + input.delete("id")).
+        patch("/v1/candidates/" + input.delete("id")).
           headers(
             "On-Behalf-Of": call("on_behalf_of", connection["usermail"])
           ).payload(input)
@@ -1142,7 +1142,7 @@
         " added to their profile. It will not convert their existing " \
         "prospect application into candidate application.",
 
-      input_fields: lambda do |object_definitions|
+      input_fields: lambda do |_object_definitions|
         [
           { name: "id", type: "integer", control_type: "number",
             optional: false, label: "Candidate ID" },
@@ -1167,7 +1167,7 @@
                 optional: true,
                 toggle_hint: "User Custom Value"
               } },
-              { name: "value" }
+            { name: "value" }
           ] },
           { name: "attachments", type: "array", of: "object", properties: [
             { name: "filename", optional: false,
