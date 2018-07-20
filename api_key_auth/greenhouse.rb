@@ -248,7 +248,7 @@
             { name: "jobs", type: "array", of: "object", properties: [
               { name: "id", type: "integer", control_type: "number" },
               { name: "name" }
-            ]},
+            ] },
             { name: "status" },
             { name: "current_stage", type: "object", properties: [
               { name: "id", type: "integer", control_type: "number" },
@@ -291,7 +291,7 @@
             { name: "start_date", type: "date_time",
               control_type: "date_time" },
             { name: "end_date", type: "date_time", control_type: "date_time" }
-          ]},
+          ] },
           { name: "custom_fields", type: "object", properties: custom_fields }
           # Keyed custom fields
         ]
@@ -342,7 +342,7 @@
                 type: :string,
                 control_type: "text",
                 optional: false,
-                toggle_hint: "User Custom Value",
+                toggle_hint: "User Custom Value"
             } }
           when "multi_select"
             multiselect_values = field["custom_field_options"].map do |ob|
@@ -360,7 +360,7 @@
                 type: :string,
                 control_type: "text",
                 optional: !field["required"],
-                toggle_hint: "User Custom Value",
+                toggle_hint: "User Custom Value"
               } }
           else
             { name: field["name_key"], type: "string", control_type: "text",
@@ -454,7 +454,7 @@
             { name: "start_date", type: "date_time",
               control_type: "date_time" },
             { name: "end_date", type: "date_time", control_type: "date_time" }
-          ]},
+          ] },
           { name: "tags", type: "array", of: "string", properties: [] },
           { name: "application", type: "object", properties: [
             { name: "job_ids", type: "array", of: "integer",
@@ -660,7 +660,7 @@
                   hint: "Type is required when you pass value",
                   toggle_hint: "Use custom value"
                 } }
-          ] },
+            ] },
           { name: "social_media_addresses", type: "array", of: "object",
             properties: [
               { name: "value" }
@@ -697,7 +697,7 @@
             properties: [
               { name: "job_id", optional: false, type: "integer",
                 control_type: "number" }
-          ] },
+            ] },
           { name: "custom_fields", type: "object", properties: custom_fields  }
           # Custom_fields[]
         ]      
@@ -718,8 +718,8 @@
               type: :string,
               control_type: "text",
               optional: true,
-              toggle_hint: "User Custom Value",
-          } },
+              toggle_hint: "User Custom Value"
+            } },
           { name: "applied_at", type: "date_time", control_type: "date_time" },
           { name: "rejected_at", type: "date_time",
             control_type: "date_time" },
@@ -746,7 +746,7 @@
             { name: "type", type: "object", properties: [
               { name: "id", type: "integer", control_type: "number" },
               { name: "name" }
-              ] }
+            ] }
           ] },
           # Rejection details
           { name: "jobs", type: "array", of: "object", properties: [
@@ -766,8 +766,8 @@
               type: :string,
               control_type: "text",
               optional: true,
-              toggle_hint: "User Custom Value",
-          } },
+              toggle_hint: "Use custom value"
+            } },
           { name: "current_stage", type: "object", properties: [
             { name: "id", type: "integer", control_type: "number" },
             { name: "name" }
@@ -795,9 +795,10 @@
         ]
 
         custom_fields = get("/v1/custom_fields/application").select { |e|
-          e["field_type"] == "application" && e["private"] == false &&
-            e["active"] == true }.
-            map do |field|
+          e["field_type"] == "application" &&
+          e["private"] == false &&
+          e["active"] == true }.
+                        map do |field|
           type = field["value_type"]
           case type
           when "short_text"
@@ -817,7 +818,7 @@
                 type: :string,
                 control_type: "text",
                 optional: !field["required"],
-                toggle_hint: "User Custom Value"
+                toggle_hint: "Use custom value"
               } }
           when "date"
             { name: field["name_key"], type: "date", control_type: "date",
