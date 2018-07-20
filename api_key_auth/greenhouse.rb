@@ -360,7 +360,7 @@
                 control_type: "text",
                 optional: !field["required"],
                 toggle_hint: "User Custom Value",
-            } }
+              } }
           else
             { name: field["name_key"], type: "string", control_type: "text",
               label: field["name"], optional: !field["required"] }
@@ -551,7 +551,7 @@
                 control_type: "text",
                 optional: !field["required"],
                 toggle_hint: "User Custom Value",
-            } }
+              } }
           when "multi_select"
             multiselect_values = field["custom_field_options"].map do |ob|
               [ob["name"], ob["name"]]
@@ -570,7 +570,7 @@
                 control_type: "text",
                 optional: !field["required"],
                 toggle_hint: "User Custom Value",
-            } }
+              } }
           else
             { name: field["name_key"], type: "string", control_type: "text",
               label: field["name"], optional: !field["required"] }
@@ -594,7 +594,7 @@
               control_type: "text",
               toggle_hint: "Use custom value",
               hint: "Possible values: <code>true</code> / <code>false</code> "
-          } },
+            } },
           { name: "phone_numbers", type: "array", of: "object", properties: [
             { name: "value" },
             { name: "type",
@@ -609,7 +609,7 @@
                 control_type: "text",
                 hint: "Type is required when you pass value",
                 toggle_hint: "Use custom value"
-            } }
+              } }
           ] },
           { name: "addresses", type: "array", of: "object", properties: [
             { name: "value" },
@@ -625,7 +625,7 @@
                 control_type: "text",
                 hint: "Type is required when you pass value",
                 toggle_hint: "Use custom value"
-            } }
+              } }
           ] },
           { name: "email_addresses", type: "array", of: "object", properties: [
             { name: "value" },
@@ -641,8 +641,8 @@
                 control_type: "text",
                 hint: "Type is required when you pass value",
                 toggle_hint: "Use custom value"
-            } }
-          ]},
+              } }
+          ] },
           { name: "website_addresses", type: "array", of: "object",
             properties: [
               { name: "value" },
@@ -658,7 +658,7 @@
                   control_type: "text",
                   hint: "Type is required when you pass value",
                   toggle_hint: "Use custom value"
-              } }
+                } }
           ] },
           { name: "social_media_addresses", type: "array", of: "object",
             properties: [
@@ -679,7 +679,7 @@
             { name: "start_date", type: "date_time",
               control_type: "date_time" },
             { name: "end_date", type: "date_time", control_type: "date_time" }
-          ]},
+          ] },
           { name: "tags", type: "array", of: "string",
             hint: "provide comma separated list of tags" },
           { name: "recruiter", type: "object", properties: [
@@ -687,7 +687,7 @@
               hint: "Either ID or email must be present" },
             { name: "email",
               hint: "Either ID or email must be present" }
-          ]},
+          ] },
           { name: "coordinator", type: "object", properties: [
             { name: "id", type: "integer", control_type: "number" },
             { name: "email" }
@@ -696,7 +696,7 @@
             properties: [
               { name: "job_id", optional: false, type: "integer",
                 control_type: "number" }
-          ]},
+          ] },
           { name: "custom_fields", type: "object", properties: custom_fields  }
           # Custom_fields[]
         ]      
@@ -751,7 +751,7 @@
           { name: "jobs", type: "array", of: "object", properties: [
             { name: "id", type: "integer", control_type: "number" },
             { name: "name" }
-          ]},
+          ] },
           { name: "status", control_type: "select",
             pick_list: [
               %w[Active active],
@@ -793,9 +793,10 @@
           # Keyed_custom_fields
         ]
 
-        custom_fields = get("/v1/custom_fields/application").select{
-          |e| e["field_type"] == "application" && e["private"] == false &&
-          e["active"] == true }.map do |field|
+        custom_fields = get("/v1/custom_fields/application").select { |e|
+          e["field_type"] == "application" && e["private"] == false &&
+            e["active"] == true }.
+            map do |field|
           type = field["value_type"]
           case type
           when "short_text"
@@ -815,7 +816,7 @@
                 type: :string,
                 control_type: "text",
                 optional: !field["required"],
-                toggle_hint: "User Custom Value",
+                toggle_hint: "User Custom Value"
               } }
           when "date"
             { name: field["name_key"], type: "date", control_type: "date",
@@ -840,7 +841,7 @@
                 type: :string,
                 control_type: "text",
                 optional: !field["required"],
-                toggle_hint: "User Custom Value",
+                toggle_hint: "User Custom Value"
               } }
           when "multi_select"
             multiselect_values = field["custom_field_options"].map do |ob|
@@ -858,7 +859,7 @@
                 type: :string,
                 control_type: "text",
                 optional: !field["required"],
-                toggle_hint: "User Custom Value",
+                toggle_hint: "User Custom Value"
               } }
           else
             { name: field["name_key"], type: "string", control_type: "text",
@@ -988,7 +989,7 @@
     }
   },
 
-  test: lambda do |_connection| 
+  test: lambda do |_connection|
     get("/v1/users").params(per_page: 1)
   end,
 
