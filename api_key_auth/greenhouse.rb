@@ -270,7 +270,7 @@
                 { name: "id", type: "integer", control_type: "number" },
                 { name: "name" }
               ] }
-			  #Custom_fields, keyed custom fields (prospect endpoint) missing.
+              #Custom_fields, keyed custom fields (prospect endpoint) missing.
             ] }
           ] },
           { name: "educations", type: "array", of: "object", properties: [
@@ -292,7 +292,7 @@
             { name: "end_date", type: "date_time", control_type: "date_time" }
           ]},
           { name: "custom_fields", type: "object", properties: custom_fields }
-          #Keyed custom fields		
+          #Keyed custom fields
         ]
         standard_fields
       end
@@ -1011,7 +1011,7 @@
 
       input_fields: lambda do |object_definitions|
         [
-		#Check job id?
+        #Check job id?
           { name: "job_id", type: "integer", control_type: "number",
             hint: "If supplied, returns only candidates that have applied " \
               "to this job. Returns both when a candidate has applied to " \
@@ -1247,7 +1247,7 @@
               control_type: "text",
               optional: true,
               toggle_hint: "User Custom Value",
-			  hint: "Possible values: active, converted, hired, and " \
+              hint: "Possible values: active, converted, hired, and " \
                 "rejected. If anything else is used, an empty response" \
                 " will be returned rather than an error."
             } }
@@ -1398,7 +1398,7 @@
               { name: "first_name" },
               { name: "last_name" },
               { name: "name" },
-			  #Check employee ID
+              #Check employee ID
               { name: "employee_id" }
             ] },
           { name: "private", type: "boolean" },
