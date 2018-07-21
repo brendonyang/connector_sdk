@@ -507,9 +507,9 @@
         "number in <span class='provider'>transmitsms.com</span>",
       help: "Automatically formats number to international format.",
 
-      input_fields: ->(object_definitions) {
+      input_fields: lambda do |object_definitions|
         object_definitions["format_number_request"]
-      },
+      end,
 
       execute: lambda do |_connection, input|
         format_number_input = {
@@ -522,9 +522,9 @@
         get("/format-number.json", format_number_input)
       end,
 
-      output_fields: ->(object_definitions) {
+      output_fields: lambda do |object_definitions|
         object_definitions["format_number_response"]
-      }
+      end
     },
 
     SendSMS: {
@@ -534,9 +534,9 @@
         "mobile number in <span class='provider'>transmitsms.com</span>",
       help: "Sends a SMS to a single number.",
 
-      input_fields: ->(object_definitions) {
+      input_fields: lambda do |object_definitions|
         object_definitions["send_sms_request"]
-      },
+      end,
 
       execute: lambda do |_connection, input|
         format_number_input = {
@@ -558,9 +558,9 @@
         end
       end,
 
-      output_fields: ->(object_definitions) {
+      output_fields: lambda do |object_definitions|
         object_definitions["send_sms_response"]
-      }
+      end
     },
 
     SendSMSToList: {
@@ -570,9 +570,9 @@
         "of contacts in <span class='provider'>transmitsms.com</span>",
       help: "Sends a SMS to a list of contacts.",
 
-      input_fields: ->(object_definitions) {
+      input_fields: lambda do |object_definitions|
         object_definitions["send_sms_list_request"]
-      },
+      end,
 
       execute: lambda do |_connection, input|
         from = input["virtual_number"] || input["sender_id"]
@@ -583,9 +583,9 @@
         { results: results }
       end,
 
-      output_fields: ->(object_definitions) {
+      output_fields: lambda do |object_definitions|
         object_definitions["send_sms_response"]
-      }
+      end
     },
 
     AddContact: {
@@ -605,9 +605,9 @@
         }
       ],
 
-      input_fields: ->(object_definitions) {
+      input_fields: lambda do |object_definitions|
         object_definitions["add_contact_to_list_request"]
-      },
+      end,
 
       execute: lambda do |_connection, input|
         number = get("/format-number.json").
@@ -619,9 +619,9 @@
         end
       end,
 
-      output_fields: ->(object_definitions) {
+      output_fields: lambda do |object_definitions|
         object_definitions["add_contact_to_list_response"]
-      }
+      end
     },
 
     DeleteContact: {
@@ -630,9 +630,9 @@
       description: "Delete a <span class='provider'>contact</span> " \
         "in <span class='provider'>transmitsms.com</span> list",
 
-      input_fields: ->(object_definitions) {
+      input_fields: lambda do |object_definitions|
         object_definitions["delete_contact_to_list_request"]
-      },
+      end,
 
       execute: lambda do |_connection, input|
         number = get("/format-number.json").
@@ -645,13 +645,13 @@
             "msisdn" => number["number"]["international"]
           }
           put("https://frontapi.transmitsms.com/zapier/" \
-            "delete-from-list.json",params)
+            "delete-from-list.json", params)
         end
       end,
 
-      output_fields: ->(object_definitions) {
+      output_fields: lambda do |object_definitions|
         object_definitions["delete_contact_to_list_response"]
-      }
+      end
     },
 
     GetContact: {
@@ -660,7 +660,7 @@
       description: "Gets <span class='provider'>contact</span> information " \
         "in <span class='provider'>transmitsms.com</span> list",
 
-      config_fields:[
+      config_fields: [
         {
           name: "list_id",
           control_type: "select",
@@ -724,21 +724,21 @@
                  forward_url: webhook_url)
       end,
 
-      webhook_notification: ->(input, payload) {
+      webhook_notification: lambda do |_input, payload|
         payload
-      },
+      end,
 
-      webhook_unsubscribe: ->(webhook) {
+      webhook_unsubscribe: lambda do |_webhook|
         # work in progress will be delivered in later phases
-      },
+      end,
 
-      dedup: ->(messages) {
+      dedup: lambda do |messages|
         messages["response_id"]
-      },
+      end,
 
-      output_fields: ->(object_definitions) {
+      output_fields: lambda do |object_definitions|
         object_definitions["sms_notification"]
-      }
+      end
     },
 
     new_contact: {
@@ -747,7 +747,7 @@
       description: "New <span class='provider'>contact</span> added to " \
         "<span class='provider'>transmitsms.com</span> list",
 
-      config_fields:[
+      config_fields: [
         {
           name: "list_id",
           control_type: "select",
@@ -771,17 +771,17 @@
         end
       end,
 
-      webhook_unsubscribe: ->(webhook) {
+      webhook_unsubscribe: lambda do |_webhook|
         # work in progress will be delivered in later phases
-      },
+      end,
 
-      dedup: ->(contact) {
+      dedup: lambda do |contact|
         contact["mobile"]
-      },
+      end,
 
-      output_fields: ->(object_definitions) {
+      output_fields: lambda do |object_definitions|
         object_definitions["new_contact_notification"]
-      }
+      end
     },
 
     GetSMSResponse: {
@@ -805,13 +805,13 @@
         }
       end,
 
-      dedup: ->(response) {
+      dedup: lambda do |response|
         response["id"]
-      },
+      end,
 
-      output_fields: ->(object_definitions) {
+      output_fields: lambda do |object_definitions|
         object_definitions["get_sms_response"]
-      }
+      end
     }
   },
 
