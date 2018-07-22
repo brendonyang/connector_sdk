@@ -19868,7 +19868,7 @@
 
       input_fields: lambda do |object_definitions|
         object_definitions["user"].
-          only("id", "login", "email", "fullname")
+          only("email", "employee_number", "fullname", "id", "login")
       end,
 
       output_fields: lambda do |object_definitions|
