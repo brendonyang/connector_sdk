@@ -24,10 +24,10 @@
     authorization: {
       type: "basic_auth",
 
-      credentials: ->(connection) {
+      credentials: lambda do |connection|
         user(connection["api_key"])
         password(connection["secret"])
-      }
+      end
     },
 
     base_uri: lambda do
@@ -35,9 +35,9 @@
     end
   },
 
-  test: ->(_connection) {
+  test: lambda do |_connection|
     get("/get-balance.json")
-  },
+  end,
 
   object_definitions: {
     # https://support.burstsms.com/hc/en-us/articles/202500828-send-sms
@@ -68,7 +68,7 @@
               optional: false,
               toggle_hint: "Use variable",
               hint: "Formats number given to international format. E.g. in " \
-                "Australia, 0422222222 will become 6142222222",
+                "Australia, 0422222222 will become 6142222222"
             }
           }
         ]
@@ -84,7 +84,7 @@
             type: "object",
             properties: [
               { name: "code", type: "string" },
-              { name: "description", type: "string"}
+              { name: "description", type: "string" }
             ]
           },
           {
@@ -225,7 +225,7 @@
             type: "string",
             control_type: "text-area",
             optional: false
-          },   
+          },
           {
             name: "virtual_number",
             control_type: "select",
@@ -303,14 +303,14 @@
           fields = []
         else
           fields = get("/get-list.json").
-                   params("list_id": config_fields["list_id"])
-                     ["fields"].map do |key, value|
-                       {
-                         name: key,
-                         type: "string",
-                         label: value
-                       }
-                     end
+                   params("list_id": config_fields["list_id"])["fields"].
+                   map do |key, value|
+                     {
+                       name: key,
+                       type: "string",
+                       label: value
+                     }
+                   end
         end
 
         fields << {
@@ -363,10 +363,10 @@
           fields = []
         else
           fields = get("/get-list.json").
-                   params("list_id": config_fields["list_id"])
-                     ["fields"].map do |key, value|
-                       { name: value, type: "string" }
-                     end
+                   params("list_id": config_fields["list_id"])["fields"].
+                   map do |_key, value|
+                     { name: value, type: "string" }
+                   end
         end
 
         fields << { name: "first_name", type: "string" }
@@ -382,10 +382,10 @@
           fields = []
         else
           fields = get("/get-list.json").
-                   params("list_id": config_fields["list_id"])
-                     ["fields"].map do |key, value|
-                       { name: value, type: "string" }
-                     end
+                   params("list_id": config_fields["list_id"])["fields"].
+                   map do |_key, value|
+                     { name: value, type: "string" }
+                   end
         end
 
         fields << { name: "type", type: "string" }
@@ -794,7 +794,8 @@
 
       poll: lambda do |_connection, _input, page|
         page ||= 1
-        response = get("https://frontapi.transmitsms.com/zapier/get-responses.json").
+        response = get("https://frontapi.transmitsms.com/zapier/" \
+                     "get-responses.json").
                    params(page: page,
                           max: 10)
         {
