@@ -302,15 +302,15 @@
         if config_fields.blank?
           fields = []
         else
-          fields = get("/get-list.json", {
-                     "list_id": config_fields["list_id"]
-                   })["fields"].map do |key, value|
-                   {
-                     name: key,
-                     type: "string",
-                     label: value
-                   }
-                   end
+          fields = get("/get-list.json").
+                   params("list_id": config_fields["list_id"])
+                     ["fields"].map do |key, value|
+                       {
+                         name: key,
+                         type: "string",
+                         label: value
+                       }
+                     end
         end
 
         fields << {
@@ -362,11 +362,11 @@
         if config_fields.blank?
           fields = []
         else
-          fields = get("/get-list.json", {
-                     "list_id": config_fields["list_id"]
-                   })["fields"].map do |key, value|
-                     { name: value, type: "string" }
-                   end
+          fields = get("/get-list.json").
+                   params("list_id": config_fields["list_id"])
+                     ["fields"].map do |key, value|
+                       { name: value, type: "string" }
+                     end
         end
 
         fields << { name: "first_name", type: "string" }
@@ -381,11 +381,11 @@
         if config_fields.blank?
           fields = []
         else
-          fields = get("/get-list.json",{
-                     "list_id": config_fields["list_id"]
-                   })["fields"].map do |key, value|
-                     { name: value, type: "string" }
-                   end
+          fields = get("/get-list.json").
+                   params("list_id": config_fields["list_id"])
+                     ["fields"].map do |key, value|
+                       { name: value, type: "string" }
+                     end
         end
 
         fields << { name: "type", type: "string" }
@@ -459,9 +459,9 @@
         if config_fields.blank?
           fields = []
         else
-          fields = get("/get-list.json",{
-                     "list_id": config_fields["list_id"]
-                   })["fields"].map do |key, value|
+          fields = get("/get-list.json").
+                   params("list_id": config_fields["list_id"])["fields"].
+                   map do |key, _value|
                      { name: key, type: "string" }
                    end
         end
@@ -477,7 +477,7 @@
           type: "object",
           properties: [
             { name: "code", type: "string" },
-            { name: "description",type: "string" }
+            { name: "description", type: "string" }
           ]
         }
       end
@@ -517,7 +517,7 @@
         }
         if input["countrycode"].present?
           format_number_input["countrycode"] = input["countrycode"].
-                                                 to_country_alpha2
+                                               to_country_alpha2
         end
         get("/format-number.json", format_number_input)
       end,
@@ -544,15 +544,15 @@
         }
         if input["countrycode"].present?
           format_number_input["countrycode"] = input["countrycode"].
-                                                 to_country_alpha2
+                                               to_country_alpha2
         end
         number = get("/format-number.json", format_number_input)
         if number["number"].include?("isValid")
           from = input["virtual_number"] || input["sender_id"]
           results = get("/send-sms.json").
-                      params(message: input["message"],
-                             to: number["number"]["international"],
-                             from: from)
+                    params(message: input["message"],
+                           to: number["number"]["international"],
+                           from: from)
           results["mobile"] = number["number"]["international"]
           { results: results }
         end
@@ -577,9 +577,9 @@
       execute: lambda do |_connection, input|
         from = input["virtual_number"] || input["sender_id"]
         results = get("/send-sms.json").
-          params(message: input["message"],
-                 list_id: input["list_id"],
-                 from: from)
+                  params(message: input["message"],
+                         list_id: input["list_id"],
+                         from: from)
         { results: results }
       end,
 
@@ -611,11 +611,11 @@
 
       execute: lambda do |_connection, input|
         number = get("/format-number.json").
-                   params(msisdn: input["to"],
-                          countrycode: input["countrycode"].to_country_alpha2)
+                 params(msisdn: input["to"],
+                        countrycode: input["countrycode"].to_country_alpha2)
         if number["number"].include?("isValid")
           input["msisdn"] = number["number"]["international"]
-          put("https://frontapi.transmitsms.com/zapier/add-to-list.json",input)
+          put("https://frontapi.transmitsms.com/zapier/add-to-list.json", input)
         end
       end,
 
@@ -636,8 +636,8 @@
 
       execute: lambda do |_connection, input|
         number = get("/format-number.json").
-                   params(msisdn: input["to"],
-                          countrycode: input["countrycode"].to_country_alpha2)
+                 params(msisdn: input["to"],
+                        countrycode: input["countrycode"].to_country_alpha2)
 
         if number["number"].include?("isValid")
           params = {
@@ -794,10 +794,9 @@
 
       poll: lambda do |_connection, _input, page|
         page ||= 1
-        response = get("https://frontapi.transmitsms.com/zapier/" \
-                     "get-responses.json").
-                     params(page: page,
-                            max: 10)
+        response = get("https://frontapi.transmitsms.com/zapier/get-responses.json").
+                   params(page: page,
+                          max: 10)
         {
           events: response["responses"],
           next_page: page + 1,
@@ -818,8 +817,8 @@
   pick_lists: {
     numbers: lambda do |_connection|
       vn = get("/get-numbers.json").
-             params("page": 1,
-                    "max": 100)
+           params("page": 1,
+                  "max": 100)
       if vn["numbers"].present?
         vn["numbers"].
           map { |number| [number["number"], number["number"]] }
@@ -828,8 +827,8 @@
 
     contactList: lambda do |_connection|
       cl = get("/get-lists.json").
-             params("page": 1,
-                    "max": 100)
+           params("page": 1,
+                  "max": 100)
       if cl["lists"].present?
         cl["lists"].
           map { |contact| [contact["name"], contact["id"]] }
