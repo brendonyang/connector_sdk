@@ -1,5 +1,5 @@
 {
-  title: "Transmit SMS",
+  title: "Burst SMS",
 
   connection: {
     fields: [
@@ -615,7 +615,8 @@
                         countrycode: input["countrycode"].to_country_alpha2)
         if number["number"].include?("isValid")
           input["msisdn"] = number["number"]["international"]
-          put("https://frontapi.transmitsms.com/zapier/add-to-list.json", input)
+          put("https://frontapi.transmitsms.com/zapier/add-to-list.json",
+              input)
         end
       end,
 
@@ -719,17 +720,25 @@
 
       type: :paging_desc,
       webhook_subscribe: lambda do |webhook_url, _connection, input|
-        get("/edit-number-options.json").
+        results = get("/edit-number-options.json").
           params(number: input["virtual_number"],
                  forward_url: webhook_url)
+
+        {
+          id: results["id"],
+          virtual_number: input["virtual_number"],
+          secret: results["secret"]
+        }
       end,
 
       webhook_notification: lambda do |_input, payload|
         payload
       end,
 
-      webhook_unsubscribe: lambda do |_webhook|
-        # work in progress will be delivered in later phases
+      webhook_unsubscribe: lambda do |webhook|
+        get("/edit-number-options.json").
+          params(number: webhook["virtual_number"],
+                 forward_url: "")
       end,
 
       dedup: lambda do |messages|
@@ -760,9 +769,15 @@
 
       type: :paging_desc,
       webhook_subscribe: lambda do |webhook_url, _connection, input|
-        get("/set-list-callback.json").
+        results = get("/set-list-callback.json").
           params(list_id: input["list_id"],
                  url: webhook_url)
+
+        {
+          id: results["id"],
+          list_id: input["list_id"],
+          secret: results["secret"]
+        }
       end,
 
       webhook_notification: lambda do |_input, payload|
@@ -771,8 +786,10 @@
         end
       end,
 
-      webhook_unsubscribe: lambda do |_webhook|
-        # work in progress will be delivered in later phases
+      webhook_unsubscribe: lambda do |webhook|
+        get("/set-list-callback.json").
+          params(list_id: webhook["list_id"],
+                 url: "")
       end,
 
       dedup: lambda do |contact|
@@ -787,7 +804,7 @@
     GetSMSResponse: {
       title: "New SMS received to inbox",
       subtitle: "New SMS received in inbox",
-      description: "New <span class='provider'>message</span> received in " \
+      description: "New <span class='provider'>SMS</span> received in " \
         "inbox in <span class='provider'>transmitsms.com</span>",
       help: "Fetches new incoming messages from all virtual numbers under " \
         "user's account.",
@@ -801,7 +818,7 @@
         {
           events: response["responses"],
           next_page: page + 1,
-          can_poll_more: response.dig("page", "count") != page
+          can_poll_more: response.dig("page", "count") <= page
         }
       end,
 
@@ -822,7 +839,7 @@
                   "max": 100)
       if vn["numbers"].present?
         vn["numbers"].
-          map { |number| [number["number"], number["number"]] }
+          pluck("number", "number")
       end
     end,
 
@@ -832,7 +849,7 @@
                   "max": 100)
       if cl["lists"].present?
         cl["lists"].
-          map { |contact| [contact["name"], contact["id"]] }
+          pluck("name", "id")
       end
     end,
 
