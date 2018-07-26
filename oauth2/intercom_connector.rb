@@ -492,9 +492,11 @@
       end
     },
 
-    list_admins: {
-      description: "List <span class='provider'>admins</span> in " \
+    get_admins: {
+      description: "Get <span class='provider'>admins</span> in " \
         "<span class='provider'>Intercom (Custom)</span>",
+      help: "Returns up to 50 records.",
+
       execute: lambda do |_connection|
         response = get("/admins")
         {
@@ -515,7 +517,7 @@
 
   triggers: {
     admin_assigned_conversation: {
-      title: "New assigned conversation  to user",
+      title: "New assigned conversation to user",
       description: "New <span class='provider'>assigned conversation</span> " \
         "by admin in <span class='provider'>Intercom (Custom)</span>",
       help: "Triggers when a conversation is assigned/unassigned in Intercom.",
