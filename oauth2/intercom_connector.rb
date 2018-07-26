@@ -1,5 +1,5 @@
 {
-  title: "Intercom SDK",
+  title: "Intercom (Custom)",
 
   connection: {
     fields: [
@@ -369,8 +369,8 @@
 
   actions: {
     get_admin_by_id: {
-      description: "Get <span class='provider'>Admin</span> by ID in " \
-        "<span class='provider'>Intercom</span>",
+      description: "Get <span class='provider'>admin</span> by ID in " \
+        "<span class='provider'>Intercom (Custom)</span>",
       subtitle: "Get admin by ID in Intercom",
       help: "Retrieves an admin in Intercom using the internal admin ID.",
 
@@ -388,6 +388,9 @@
     },
 
     reply_to_conversation_as_admin: {
+      description: "Reply to <span class='provider'>conversation</span> as " \
+        "admin in <span class='provider'>Intercom (Custom)</span>",
+
       input_fields: lambda do
         [
           { name: "conversation_id", type: "integer" },
@@ -423,6 +426,10 @@
     },
 
     search_company: {
+      description: "Search <span class='provider'>companies</span> " \
+        "<span class='provider'>Intercom (Custom)</span>",
+      help: "Returns up to 50 records.",
+
       input_fields: lambda do |_object_definitions|
         [
           {
@@ -459,6 +466,9 @@
     },
 
     create_or_update_company: {
+      title: "Create/update company",
+      description: "Creates / updates a <span class='provider'>company" \
+        "</span> in <span class='provider'>Intercom (Custom)</span>",
       help: "Creates a company if Company ID doesn't exist in Intercom, " \
         "and updates if it does.",
 
@@ -483,6 +493,8 @@
     },
 
     list_admins: {
+      description: "List <span class='provider'>admins</span> in " \
+        "<span class='provider'>Intercom (Custom)</span>",
       execute: lambda do |_connection|
         response = get("/admins")
         {
@@ -503,10 +515,11 @@
 
   triggers: {
     admin_assigned_conversation: {
-      description: "<span class='provider'>Admin Assigned</span> in " \
-        "<span class='provider'>Intercom</span>",
+      title: "New assigned conversation  to user",
+      description: "New <span class='provider'>assigned conversation</span> " \
+        "by admin in <span class='provider'>Intercom (Custom)</span>",
       help: "Triggers when a conversation is assigned/unassigned in Intercom.",
-      subtitle: "Admin assigned conversation in Intercom",
+      subtitle: "New assigned conversation by admin",
 
       webhook_subscribe: lambda do |webhook_url, _connection|
         post("/subscriptions").
@@ -536,8 +549,9 @@
     },
 
     conversation_closed: {
-      description: "<span class='provider'>Conversation Closed</span> in " \
-        "<span class='provider'>Intercom</span>",
+      title: "New closed conversation",
+      description: "New <span class='provider'>closed conversation</span> in" \
+        " <span class='provider'>Intercom (Custom)</span>",
       help: "Triggers when a conversation is marked as closed in intercom",
       subtitle: "Admin closed a conversation in Intercom",
 
@@ -569,8 +583,9 @@
     },
 
     conversation_opened: {
-      description: "<span class='provider'>Conversation Opened</span> " \
-        "in <span class='provider'>Intercom</span>",
+      title: "New opened conversation",
+      description: "New <span class='provider'>opened conversation</span> " \
+        "in <span class='provider'>Intercom (Custom)</span>",
       help: "Triggers when a conversation is opened in intercom",
       subtitle: "Admin opened a conversation in Intercom",
 
@@ -603,14 +618,9 @@
   },
 
   pick_lists: {
-    segments: lambda do |_connection|
-      get("/segments?per_page=100")["segments"].
-        map { |segment| [segment["name"], segment["id"]] }
-    end,
-
     admins: lambda do |_connection|
       get("/admins")["admins"].
-        map { |admin| [admin["name"], admin["id"]] }
+        pluck("name", "id")
     end
   }
 }
