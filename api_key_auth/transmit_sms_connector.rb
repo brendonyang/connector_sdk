@@ -721,8 +721,8 @@
       type: :paging_desc,
       webhook_subscribe: lambda do |webhook_url, _connection, input|
         results = get("/edit-number-options.json").
-          params(number: input["virtual_number"],
-                 forward_url: webhook_url)
+                  params(number: input["virtual_number"],
+                         forward_url: webhook_url)
 
         {
           id: results["id"],
@@ -770,8 +770,8 @@
       type: :paging_desc,
       webhook_subscribe: lambda do |webhook_url, _connection, input|
         results = get("/set-list-callback.json").
-          params(list_id: input["list_id"],
-                 url: webhook_url)
+                  params(list_id: input["list_id"],
+                         url: webhook_url)
 
         {
           id: results["id"],
