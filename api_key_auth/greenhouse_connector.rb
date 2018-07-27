@@ -39,13 +39,13 @@
       # https://developers.greenhouse.io/harvest.html#the-candidate-object
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields").
-                          params(field_type: "candidate").
-                          select lambda do |e|
-                            e["field_type"] == "candidate" &&
+                        params(field_type: "candidate").
+                        select lambda do |e|
+                          e["field_type"] == "candidate" &&
                             e["private"] == false &&
                             e["active"] == true
-                          end.
-                          map do |field|
+                        end.
+                        map do |field|
           type = field["value_type"]
           case type
           when "short_text"
@@ -70,9 +70,9 @@
               label: field["name"], optional: !field["required"] }
           when "single_select"
             select_values = field["custom_field_options"].
-                              map do |ob|
-                                [ob["name"], ob["name"]]
-                              end
+                            map do |ob|
+                              [ob["name"], ob["name"]]
+                            end
             { name: field["name_key"], control_type: "select",
               label: field["name"], optional: !field["required"],
               pick_list: select_values,
@@ -87,9 +87,9 @@
               } }
           when "multi_select"
             multiselect_values = field["custom_field_options"].
-                                   map do |ob|
-                                     [ob["name"], ob["name"]]
-                                   end
+                                 map do |ob|
+                                   [ob["name"], ob["name"]]
+                                 end
             { name: field["name_key"], control_type: "multiselect",
               label: field["name"], optional: !field["required"],
               pick_list: multiselect_values,
@@ -309,13 +309,13 @@
       # https://developers.greenhouse.io/harvest.html#post-add-prospect
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields").
-                          params(field_type: "candidate").
-                          select lamda do |e|
-                            e["field_type"] == "candidate" &&
+                        params(field_type: "candidate").
+                        select lamda do |e|
+                          e["field_type"] == "candidate" &&
                             e["private"] == false &&
                             e["active"] == true
-                          end.
-                          map do |field|
+                        end.
+                        map do |field|
           type = field["value_type"]
           case type
           when "short_text"
@@ -344,9 +344,9 @@
               optional: !field["required"] }
           when "single_select"
             select_values = field["custom_field_options"].
-                              map do |ob|
-                                [ob["name"], ob["name"]]
-                              end
+                            map do |ob|
+                              [ob["name"], ob["name"]]
+                            end
             { name: field["name_key"], control_type: "select",
               label: field["name"], optional: !field["required"],
               pick_list: select_values,
@@ -361,9 +361,9 @@
               } }
           when "multi_select"
             multiselect_values = field["custom_field_options"].
-                                   map do |ob|
-                                     [ob["name"], ob["name"]]
-                                   end
+                                 map do |ob|
+                                   [ob["name"], ob["name"]]
+                                 end
             { name: field["name_key"], control_type: "multiselect",
               label: field["name"], optional: !field["required"],
               pick_list: multiselect_values,
@@ -521,12 +521,12 @@
       # https://developers.greenhouse.io/harvest.html#post-add-candidate
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields/candidate").
-                          select lambda do |e|
-                            e["field_type"] == "candidate" &&
+                        select lambda do |e|
+                          e["field_type"] == "candidate" &&
                             e["private"] == false &&
                             e["active"] == true
-                          end.
-                          map do |field|
+                        end.
+                        map do |field|
           type = field["value_type"]
           case type
           when "short_text"
@@ -559,9 +559,9 @@
               label: field["name"], optional: !field["required"] }
           when "single_select"
             select_values = field["custom_field_options"].
-                              map do |ob|
-                                [ob["name"], ob["name"]]
-                              end
+                            map do |ob|
+                              [ob["name"], ob["name"]]
+                            end
             { name: field["name_key"], control_type: "select",
               label: field["name"], optional: !field["required"],
               pick_list: select_values,
@@ -576,9 +576,9 @@
               } }
           when "multi_select"
             multiselect_values = field["custom_field_options"].
-                                   map do |ob|
-                                     [ob["name"], ob["name"]]
-                                   end
+                                 map do |ob|
+                                   [ob["name"], ob["name"]]
+                                 end
             puts multiselect_values
             { name: field["name_key"], control_type: "multiselect",
               label: field["name"], optional: !field["required"],
@@ -817,12 +817,12 @@
         ]
 
         custom_fields = get("/v1/custom_fields/application").
-                          select lambda do |e|
-                            e["field_type"] == "application" &&
+                        select lambda do |e|
+                          e["field_type"] == "application" &&
                             e["private"] == false &&
                             e["active"] == true
-                          end.
-                          map do |field|
+                        end.
+                        map do |field|
           type = field["value_type"]
           case type
           when "short_text"
@@ -855,9 +855,9 @@
               label: field["name"], optional: !field["required"] }
           when "single_select"
             select_values = field["custom_field_options"].
-                              map do |ob|
-                                [ob["name"], ob["name"]]
-                              end
+                            map do |ob|
+                              [ob["name"], ob["name"]]
+                            end
             { name: field["name_key"], control_type: "select",
               label: field["name"], optional: !field["required"],
               pick_list: select_values,
@@ -872,9 +872,9 @@
               } }
           when "multi_select"
             multiselect_values = field["custom_field_options"].
-                                   map do |ob|
-                                     [ob["name"], ob["name"]]
-                                   end
+                                 map do |ob|
+                                   [ob["name"], ob["name"]]
+                                 end
             { name: field["name_key"], control_type: "multiselect",
               label: field["name"], optional: !field["required"],
               pick_list: multiselect_values,
@@ -1641,7 +1641,7 @@
           ] }
         ]
       end
-    },
+      },
 
     get_candidate_activity_feed: {
       description: "Get candidate <span class='provider'>activity " \
