@@ -310,11 +310,11 @@
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields").
                           params(field_type: "candidate").
-                          select { |e|
+                          select lamda do |e|
                             e["field_type"] == "candidate" &&
-                              e["private"] == false &&
-                              e["active"] == true
-                          }.
+                            e["private"] == false &&
+                            e["active"] == true
+                          end.
                           map do |field|
           type = field["value_type"]
           case type
@@ -1579,9 +1579,9 @@
         "organization, sorted by priority.",
 
       execute: lambda do
-          {
-            degrees: get("/v1/degrees")
-          }
+        {
+          degrees: get("/v1/degrees")
+        }
       end,
 
       output_fields: lambda do
