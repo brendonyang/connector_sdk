@@ -40,11 +40,11 @@
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields").
                           params(field_type: "candidate").
-                          select { |e|
+                          select lambda do |e|
                             e["field_type"] == "candidate" &&
-                              e["private"] == false &&
-                              e["active"] == true
-                          }.
+                            e["private"] == false &&
+                            e["active"] == true
+                          end.
                           map do |field|
           type = field["value_type"]
           case type
@@ -521,11 +521,11 @@
       # https://developers.greenhouse.io/harvest.html#post-add-candidate
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields/candidate").
-                          select { |e|
+                          select lambda do |e|
                             e["field_type"] == "candidate" &&
-                              e["private"] == false &&
-                              e["active"] == true
-                          }.
+                            e["private"] == false &&
+                            e["active"] == true
+                          end.
                           map do |field|
           type = field["value_type"]
           case type
@@ -817,11 +817,11 @@
         ]
 
         custom_fields = get("/v1/custom_fields/application").
-                          select { |e|
+                          select lambda do |e|
                             e["field_type"] == "application" &&
-                              e["private"] == false &&
-                              e["active"] == true
-                          }.
+                            e["private"] == false &&
+                            e["active"] == true
+                          end.
                           map do |field|
           type = field["value_type"]
           case type
