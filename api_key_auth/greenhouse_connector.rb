@@ -479,7 +479,7 @@
             { name: "referrer", type: "object", properties: [
               { name: "type" },
               { name: "value", type: "integer", control_type: "number" }
-            ] },
+            ] }
           ] },
           { name: "custom_fields", type: "object", properties: custom_fields },
           { name: "recruiter", type: "object", properties: [
@@ -521,11 +521,7 @@
       # https://developers.greenhouse.io/harvest.html#post-add-candidate
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields/candidate").
-                        select lambda do |e|
-                          e["field_type"] == "candidate" &&
-                            e["private"] == false &&
-                            e["active"] == true
-                        end.
+                        select { |e| e["field_type"] == "candidate" && e["private"] == false && e["active"] == true }.
                         map do |field|
           type = field["value_type"]
           case type
@@ -1360,8 +1356,8 @@
 
       execute: lambda do |connection, input|
         on_behalf_of = (get("/v1/users").
-                          params(per_page: 1,
-                                 email: connection["usermail"]) || {})["id"]
+                       params(per_page: 1,
+                              email: connection["usermail"]) || {})["id"]
         post("/v1/users").
           headers("On-Behalf-Of": on_behalf_of).payload(input)
       end,
@@ -1593,7 +1589,7 @@
           ] }
         ]
       end
-      },
+    },
 
     list_disciplines: {
       description: "List <span class='provider'>disciplines</span> in " \
@@ -1641,7 +1637,7 @@
           ] }
         ]
       end
-    },
+      },
 
     get_candidate_activity_feed: {
       description: "Get candidate <span class='provider'>activity " \
@@ -1693,8 +1689,11 @@
         sorted_candidates = candidates.sort_by { |obj|
           obj["updated_at"]
         } unless candidates.present?
-        last_updated_at = sorted_candidates.blank? ? last_updated_at :
-          sorted_candidates.last["updated_at"]
+        if sorted_candidates.blank?
+          last_updated_at = last_updated_at
+        else
+          last_updated_at = sorted_candidates.last["updated_at"]
+        end
 
         {
           events: sorted_candidates,
