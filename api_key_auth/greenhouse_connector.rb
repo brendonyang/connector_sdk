@@ -36,12 +36,16 @@
 
   object_definitions: {
     candidate: {
-    # https://developers.greenhouse.io/harvest.html#the-candidate-object
+      # https://developers.greenhouse.io/harvest.html#the-candidate-object
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields").
-          params(field_type: "candidate").
-          select{ |e| e["field_type"] == "candidate" &&
-            e["private"] == false && e["active"] == true }.map do |field|
+                          params(field_type: "candidate").
+                          select lambda do |e|
+                            e["field_type"] == "candidate" &&
+                            e["private"] == false &&
+                            e["active"] == true
+                          end.
+                          map do |field|
           type = field["value_type"]
           case type
           when "short_text"
@@ -65,9 +69,10 @@
             { name: field["name_key"], type: "string", control_type: "text",
               label: field["name"], optional: !field["required"] }
           when "single_select"
-            select_values = field["custom_field_options"].map do |ob|
-              [ob["name"], ob["name"]]
-            end
+            select_values = field["custom_field_options"].
+                              map do |ob|
+                                [ob["name"], ob["name"]]
+                              end
             { name: field["name_key"], control_type: "select",
               label: field["name"], optional: !field["required"],
               pick_list: select_values,
@@ -81,9 +86,10 @@
                 toggle_hint: "Use custom value"
               } }
           when "multi_select"
-            multiselect_values = field["custom_field_options"].map do |ob|
-              [ob["name"], ob["name"]]
-            end
+            multiselect_values = field["custom_field_options"].
+                                   map do |ob|
+                                     [ob["name"], ob["name"]]
+                                   end
             { name: field["name_key"], control_type: "multiselect",
               label: field["name"], optional: !field["required"],
               pick_list: multiselect_values,
@@ -193,7 +199,7 @@
                   control_type: "text",
                   toggle_hint: "Use custom value"
                 } }
-          ] },
+            ] },
           { name: "social_media_addresses", type: "object", properties: [
             { name: "value" }
           ] },
@@ -300,38 +306,47 @@
     },
 
     add_prospect: {
-    # https://developers.greenhouse.io/harvest.html#post-add-prospect
+      # https://developers.greenhouse.io/harvest.html#post-add-prospect
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields").
-          params(field_type: "candidate").
-          select{ |e| e["field_type"] == "candidate" &&
-            e["private"] == false && e["active"] == true }.map do |field|
+                          params(field_type: "candidate").
+                          select lamda do |e|
+                            e["field_type"] == "candidate" &&
+                            e["private"] == false &&
+                            e["active"] == true
+                          end.
+                          map do |field|
           type = field["value_type"]
           case type
           when "short_text"
-            { name: field["name_key"], type: "string", control_type: "text",
-              label: field["name"], optional: !field["required"] }
+            { name: field["name_key"], type: "string",
+              control_type: "text", label: field["name"],
+              optional: !field["required"] }
           when "long_text"
             { name: field["name_key"], type: "string",
-              control_type: "text-area",
-              label: field["name"], optional: !field["required"] }
+              control_type: "text-area", label: field["name"],
+              optional: !field["required"] }
           when "yes_no"
             { name: field["name_key"], type: "boolean",
-              control_type: "checkbox",
-              label: field["name"], optional: !field["required"] }
+              control_type: "checkbox", label: field["name"],
+              optional: !field["required"] }
           when "date"
-            { name: field["name_key"], type: "date", control_type: "date",
-              label: field["name"], optional: !field["required"] }
+            { name: field["name_key"], type: "date",
+              control_type: "date", label: field["name"],
+              optional: !field["required"] }
           when "url"
-            { name: field["name_key"], type: "string", control_type: "url",
-              label: field["name"], optional: !field["required"] }
+            { name: field["name_key"], type: "string",
+              control_type: "url", label: field["name"],
+              optional: !field["required"] }
           when "user"
-            { name: field["name_key"], type: "string", control_type: "text",
-              label: field["name"], optional: !field["required"] }
+            { name: field["name_key"], type: "string",
+              control_type: "text", label: field["name"],
+              optional: !field["required"] }
           when "single_select"
-            select_values = field["custom_field_options"].map do |ob|
-              [ob["name"], ob["name"]]
-            end
+            select_values = field["custom_field_options"].
+                              map do |ob|
+                                [ob["name"], ob["name"]]
+                              end
             { name: field["name_key"], control_type: "select",
               label: field["name"], optional: !field["required"],
               pick_list: select_values,
@@ -345,9 +360,10 @@
                 toggle_hint: "Use custom value"
               } }
           when "multi_select"
-            multiselect_values = field["custom_field_options"].map do |ob|
-              [ob["name"], ob["name"]]
-            end
+            multiselect_values = field["custom_field_options"].
+                                   map do |ob|
+                                     [ob["name"], ob["name"]]
+                                   end
             { name: field["name_key"], control_type: "multiselect",
               label: field["name"], optional: !field["required"],
               pick_list: multiselect_values,
@@ -431,7 +447,7 @@
                   control_type: "text",
                   toggle_hint: "Use custom value"
                 } }
-          ] },
+            ] },
           { name: "social_media_addresses", type: "object", properties: [
             { name: "value" }
           ] },
@@ -495,19 +511,22 @@
                 { name: "private", type: "boolean", control_type: "checkbox" },
                 { name: "visibility" }
               ] }
-          ] }
+            ] }
         ]
         standard_fields
       end
     },
 
     create_candidate: {
-    # https://developers.greenhouse.io/harvest.html#post-add-candidate
+      # https://developers.greenhouse.io/harvest.html#post-add-candidate
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields/candidate").
-                        select { |e|
-            e["field_type"] == "candidate" &&
-            e["private"] == false && e["active"] == true }.map do |field|
+                          select lambda do |e|
+                            e["field_type"] == "candidate" &&
+                            e["private"] == false &&
+                            e["active"] == true
+                          end.
+                          map do |field|
           type = field["value_type"]
           case type
           when "short_text"
@@ -539,9 +558,10 @@
             { name: field["name_key"], type: "string", control_type: "text",
               label: field["name"], optional: !field["required"] }
           when "single_select"
-            select_values = field["custom_field_options"].map do |ob|
-              [ob["name"], ob["name"]]
-            end
+            select_values = field["custom_field_options"].
+                              map do |ob|
+                                [ob["name"], ob["name"]]
+                              end
             { name: field["name_key"], control_type: "select",
               label: field["name"], optional: !field["required"],
               pick_list: select_values,
@@ -555,9 +575,10 @@
                 toggle_hint: "Use custom value"
               } }
           when "multi_select"
-            multiselect_values = field["custom_field_options"].map do |ob|
-              [ob["name"], ob["name"]]
-            end
+            multiselect_values = field["custom_field_options"].
+                                   map do |ob|
+                                     [ob["name"], ob["name"]]
+                                   end
             puts multiselect_values
             { name: field["name_key"], control_type: "multiselect",
               label: field["name"], optional: !field["required"],
@@ -795,11 +816,13 @@
           # Keyed_custom_fields
         ]
 
-        custom_fields = get("/v1/custom_fields/application").select { |e|
-          e["field_type"] == "application" &&
-            e["private"] == false &&
-            e["active"] == true }.
-                        map do |field|
+        custom_fields = get("/v1/custom_fields/application").
+                          select lambda do |e|
+                            e["field_type"] == "application" &&
+                            e["private"] == false &&
+                            e["active"] == true
+                          end.
+                          map do |field|
           type = field["value_type"]
           case type
           when "short_text"
@@ -831,9 +854,10 @@
             { name: field["name_key"], type: "string", control_type: "text",
               label: field["name"], optional: !field["required"] }
           when "single_select"
-            select_values = field["custom_field_options"].map do |ob|
-              [ob["name"], ob["name"]]
-            end
+            select_values = field["custom_field_options"].
+                              map do |ob|
+                                [ob["name"], ob["name"]]
+                              end
             { name: field["name_key"], control_type: "select",
               label: field["name"], optional: !field["required"],
               pick_list: select_values,
@@ -847,9 +871,10 @@
                 toggle_hint: "Use custom value"
               } }
           when "multi_select"
-            multiselect_values = field["custom_field_options"].map do |ob|
-              [ob["name"], ob["name"]]
-            end
+            multiselect_values = field["custom_field_options"].
+                                   map do |ob|
+                                     [ob["name"], ob["name"]]
+                                   end
             { name: field["name_key"], control_type: "multiselect",
               label: field["name"], optional: !field["required"],
               pick_list: multiselect_values,
@@ -1661,12 +1686,13 @@
 
       poll: lambda do |_connection, input, last_updated_at|
         last_updated_at = last_updated_at || (input["since"] || 1.hour.ago).
-                            to_time.utc.iso8601
+                                               to_time.utc.iso8601
         candidates = get("/v1/candidates").
-                     params(per_page: 100,
-                            updated_after: last_updated_at)
+                       params(per_page: 100,
+                              updated_after: last_updated_at)
         sorted_candidates = candidates.sort_by { |obj|
-          obj["updated_at"] } unless candidates.blank?
+          obj["updated_at"]
+        } unless candidates.present?
         last_updated_at = sorted_candidates.blank? ? last_updated_at :
           sorted_candidates.last["updated_at"]
 
