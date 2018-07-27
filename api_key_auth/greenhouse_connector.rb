@@ -1579,9 +1579,9 @@
         "organization, sorted by priority.",
 
       execute: lambda do
-        {
-          degrees: get("/v1/degrees")
-        }
+          {
+            degrees: get("/v1/degrees")
+          }
       end,
 
       output_fields: lambda do
