@@ -36,14 +36,15 @@
 
   object_definitions: {
     candidate: {
-    # https://developers.greenhouse.io/harvest.html#the-candidate-object
+      # https://developers.greenhouse.io/harvest.html#the-candidate-object
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields").
                           params(field_type: "candidate").
-                          select{ |e|
+                          select { |e|
                             e["field_type"] == "candidate" &&
                               e["private"] == false &&
-                              e["active"] == true }.
+                              e["active"] == true
+                          }.
                           map do |field|
           type = field["value_type"]
           case type
@@ -198,7 +199,7 @@
                   control_type: "text",
                   toggle_hint: "Use custom value"
                 } }
-          ] },
+            ] },
           { name: "social_media_addresses", type: "object", properties: [
             { name: "value" }
           ] },
@@ -305,14 +306,15 @@
     },
 
     add_prospect: {
-    # https://developers.greenhouse.io/harvest.html#post-add-prospect
+      # https://developers.greenhouse.io/harvest.html#post-add-prospect
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields").
                           params(field_type: "candidate").
                           select { |e|
                             e["field_type"] == "candidate" &&
                               e["private"] == false &&
-                              e["active"] == true }.
+                              e["active"] == true
+                          }.
                           map do |field|
           type = field["value_type"]
           case type
@@ -818,7 +820,8 @@
                           select { |e|
                             e["field_type"] == "application" &&
                               e["private"] == false &&
-                              e["active"] == true }.
+                              e["active"] == true
+                          }.
                           map do |field|
           type = field["value_type"]
           case type
@@ -1686,9 +1689,10 @@
                                                to_time.utc.iso8601
         candidates = get("/v1/candidates").
                        params(per_page: 100,
-                            updated_after: last_updated_at)
+                              updated_after: last_updated_at)
         sorted_candidates = candidates.sort_by { |obj|
-          obj["updated_at"] } unless candidates.present?
+          obj["updated_at"]
+        } unless candidates.present?
         last_updated_at = sorted_candidates.blank? ? last_updated_at :
           sorted_candidates.last["updated_at"]
 
