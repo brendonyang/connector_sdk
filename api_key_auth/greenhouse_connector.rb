@@ -1593,7 +1593,7 @@
           ] }
         ]
       end
-    },
+      },
 
     list_disciplines: {
       description: "List <span class='provider'>disciplines</span> in " \
@@ -1641,7 +1641,7 @@
           ] }
         ]
       end
-      },
+    },
 
     get_candidate_activity_feed: {
       description: "Get candidate <span class='provider'>activity " \
@@ -1686,10 +1686,10 @@
 
       poll: lambda do |_connection, input, last_updated_at|
         last_updated_at = last_updated_at || (input["since"] || 1.hour.ago).
-                                               to_time.utc.iso8601
+                                             to_time.utc.iso8601
         candidates = get("/v1/candidates").
-                       params(per_page: 100,
-                              updated_after: last_updated_at)
+                     params(per_page: 100,
+                            updated_after: last_updated_at)
         sorted_candidates = candidates.sort_by { |obj|
           obj["updated_at"]
         } unless candidates.present?
