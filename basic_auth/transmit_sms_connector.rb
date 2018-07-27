@@ -1,5 +1,5 @@
 {
-  title: "Burst SMS",
+  title: "TransmitSMS",
 
   connection: {
     fields: [
