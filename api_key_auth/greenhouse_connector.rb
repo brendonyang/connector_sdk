@@ -40,11 +40,7 @@
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields").
                         params(field_type: "candidate").
-                        select lambda do |e|
-                          e["field_type"] == "candidate" &&
-                            e["private"] == false &&
-                            e["active"] == true
-                        end.
+                        select { |e| e["field_type"] == "candidate" && e["private"] == false && e["active"] == true }.
                         map do |field|
           type = field["value_type"]
           case type
@@ -310,11 +306,7 @@
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields").
                         params(field_type: "candidate").
-                        select lamda do |e|
-                          e["field_type"] == "candidate" &&
-                            e["private"] == false &&
-                            e["active"] == true
-                        end.
+                        select { |e| e["field_type"] == "candidate" && e["private"] == false && e["active"] == true }.
                         map do |field|
           type = field["value_type"]
           case type
@@ -813,11 +805,7 @@
         ]
 
         custom_fields = get("/v1/custom_fields/application").
-                        select lambda do |e|
-                          e["field_type"] == "application" &&
-                            e["private"] == false &&
-                            e["active"] == true
-                        end.
+                        select { |e| e["field_type"] == "application" && e["private"] == false && e["active"] == true }.
                         map do |field|
           type = field["value_type"]
           case type
@@ -1637,7 +1625,7 @@
           ] }
         ]
       end
-      },
+    },
 
     get_candidate_activity_feed: {
       description: "Get candidate <span class='provider'>activity " \
