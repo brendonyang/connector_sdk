@@ -40,7 +40,11 @@
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields").
                         params(field_type: "candidate").
-                        select { |e| e["field_type"] == "candidate" && e["private"] == false && e["active"] == true }.
+                        select lambda do |e|
+                          e["field_type"] == "candidate" &&
+                          e["private"] == false &&
+                          e["active"] == true
+                        end.
                         map do |field|
           type = field["value_type"]
           case type
@@ -306,7 +310,11 @@
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields").
                         params(field_type: "candidate").
-                        select { |e| e["field_type"] == "candidate" && e["private"] == false && e["active"] == true }.
+                        select lambda do |e|
+                          e["field_type"] == "candidate" &&
+                          e["private"] == false &&
+                          e["active"] == true
+                        end.
                         map do |field|
           type = field["value_type"]
           case type
@@ -513,7 +521,11 @@
       # https://developers.greenhouse.io/harvest.html#post-add-candidate
       fields: lambda do |_|
         custom_fields = get("/v1/custom_fields/candidate").
-                        select { |e| e["field_type"] == "candidate" && e["private"] == false && e["active"] == true }.
+                        select lambda do |e|
+                          e["field_type"] == "candidate" &&
+                          e["private"] == false &&
+                          e["active"] == true
+                        end.
                         map do |field|
           type = field["value_type"]
           case type
@@ -805,7 +817,11 @@
         ]
 
         custom_fields = get("/v1/custom_fields/application").
-                        select { |e| e["field_type"] == "application" && e["private"] == false && e["active"] == true }.
+                        select lambda do |e|
+                          e["field_type"] == "application" &&
+                          e["private"] == false &&
+                          e["active"] == true
+                        end.
                         map do |field|
           type = field["value_type"]
           case type
@@ -1675,13 +1691,13 @@
                      params(per_page: 100,
                             updated_after: last_updated_at)
         sorted_candidates = candidates.sort_by { |obj|
-          obj["updated_at"]
-        } unless candidates.present?
-        if sorted_candidates.blank?
-          last_updated_at = last_updated_at
-        else
-          last_updated_at = sorted_candidates.last["updated_at"]
-        end
+          obj["updated_at"] } unless candidates.blank?
+        last_updated_at =
+          if sorted_candidates.blank?
+            last_updated_at
+          else
+            sorted_candidates.last["updated_at"]
+          end
 
         {
           events: sorted_candidates,
