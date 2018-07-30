@@ -1033,7 +1033,7 @@
     search_candidate: {
       description: "Search <span class='provider'>candidates</span> in " \
         "<span class='provider'>Greenhouse</span>",
-      title: "Search candidates in Greenhouse",
+      title: "Search candidates",
       help: "Fetches a list of candidates that matches the search criteria." \
         "Returns a maximum of 100 records.",
 
@@ -1079,9 +1079,10 @@
     },
 
     get_candidate: {
+      title: "Get candidate by ID",
       description: "Get <span class='provider'>candidate</span> by " \
         "ID in <span class='provider'>Greenhouse</span>",
-      title: "Get candidate details by ID in Greenhouse",
+      subtitle: "Get candidate details by ID in Greenhouse",
       help: "Returns information about a candidate.",
 
       input_fields: lambda do |_object_definitions|
@@ -1103,7 +1104,7 @@
     create_candidate: {
       description: "Create <span class='provider'>candidate</span> in " \
         "<span class='provider'>Greenhouse</span>",
-      title: "Create candidate in Greenhouse",
+      title: "Create candidate",
 
       input_fields: lambda do |object_definitions|
         object_definitions["create_candidate"].
@@ -1140,7 +1141,7 @@
     update_candidate: {
       description: "Update <span class='provider'>Candidate</span> in " \
       "<span class='provider'> Greenhouse</span>",
-      title: "Update candidate in Greenhouse",
+      title: "Update candidate",
 
       input_fields: lambda do |object_definitions|
         [
@@ -1242,7 +1243,7 @@
     search_applications: {
       description: "Search <span class='provider'>applications</span> in " \
         "<span class='provider'>Greenhouse</span>",
-      title: "Search applications in Greenhouse",
+      title: "Search applications",
       help: "Fetches a list of applications that matches the search criteria" \
         ". Returns a maximum of 100 records.",
 
@@ -1493,7 +1494,7 @@
     add_education: {
       description: "Add <span class='provider'>education</span> to candidate" \
         " in <span class='provider'>Greenhouse</span>",
-      title: "Add Education to candidate",
+      title: "Add education to candidate",
 
       input_fields: lambda do |object_definitions|
         [
@@ -1549,7 +1550,7 @@
     add_prospect: {
       description: "Add <span class='provider'>prospect</span> in " \
         "<span class='provider'>Greenhouse</span>",
-      title: "Add Prospect",
+      title: "Add prospect",
       help: "Creates a new prospect. Prospect can be on no jobs or many jobs" \
         ", unlike candidate. Prospect cannot be added to a job stage " \
         "without converting to a candidate.",
@@ -1670,7 +1671,7 @@
     new_updated_candidate: {
       description: "New or updated <span class='provider'>candidate</span> " \
         "in <span class='provider'>Greenhouse</span>",
-      title: "New or updated candidate in Greenhouse",
+      title: "New or updated candidate",
       help: "Triggers when candidates is created/updated.",
 
       input_fields: lambda do |_object_definitions|
