@@ -23,7 +23,7 @@
     end
   },
 
-  test: ->() {
+  test: -> {
     get("/v2/alerts")
   },
 
@@ -35,16 +35,16 @@
           { name: "alias" },
           { name: "description" },
           { name: "responders", type: :object, properties: [
-              { name: "id" },
-              { name: "name" },
-              { name: "username" },
-              { name: "type" },
+            { name: "id" },
+            { name: "name" },
+            { name: "username" },
+            { name: "type" },
           ] },
           { name: "visibleTo", type: :object, properties: [
-              { name: "id" },
-              { name: "name" },
-              { name: "username" },
-              { name: "type" },
+            { name: "id" },
+            { name: "name" },
+            { name: "username" },
+            { name: "type" },
           ] },
           { name: "entity" },
           { name: "priority", control_type: "select", pick_list: "priorities" }
@@ -63,7 +63,7 @@
         object_definitions["alert"]
       },
 
-      execute: ->(connection,input) {
+      execute: ->(_connection,input) {
         post("https://api.opsgenie.com/v2/alerts", input)
       },
 
@@ -86,14 +86,14 @@
   },
 
   pick_lists: {
-    priorities: lambda do |connection|
-    [
-      %w[P1 P1],
-      %w[P2 P2],
-      %w[P3 P3],
-      %w[P4 P4],
-      %w[P5 P5]
-    ]
+    priorities: lambda do |_connection|
+      [
+        %w[P1 P1],
+        %w[P2 P2],
+        %w[P3 P3],
+        %w[P4 P4],
+        %w[P5 P5]
+      ]
     end
   }
 }
