@@ -94,9 +94,32 @@ Find out more [here](https://docs.workato.com/developing-connectors/sdk/authenti
 
 Base URI was introduced to help shorten the method calls, omitting the need to specify the full URI. After defining the base URI, when using the HTTP verb methods, only the endpoint for the particular trigger/action has to be specified.
 
-Find out more here<!-- Placeholder for Base URI -->.
+### Definition
+```ruby
+base_uri: lambda do
+  "https://harvest.greenhouse.io"
+end
+```
 
-### Test
+### Usage Examples
+
+After defining the base URI, subsequently, future calls to the API endpoint can have the base URI omitted:
+
+```ruby
+  test: lambda do |_connection|
+    get("/v1/users").params(per_page: 1)
+  end,
+```
+
+instead of
+
+```ruby
+  test: lambda do |_connection|
+    get("https://harvest.greenhouse.io/v1/users").params(per_page: 1)
+  end,
+```
+
+## Test
 
 The `Test` block is important to ensure that connection is successful. This should be a request that will always be accessible to any user, to ensure that the connection is correctly set set-up.
 
@@ -162,13 +185,18 @@ The description provides a short summary of what each trigger/action does. When 
 
 Sample code:
 ```ruby
-  description: "Create <span class='provider'>lead</span> in " \
-    "<span class='provider'>Salesforce</span>"
+description: "Search <span class='provider'>candidates</span> in " \
+  "<span class='provider'>Greenhouse</span>"
 ```
 
 ### Help
 
 Help text should be added to each trigger/action to provide user an overview of the action, and its limitations (if any). Examples include the differences between two similar actions, or the maximum records that can be returned.
+
+Sample code:
+```ruby
+help: "Fetches a list of candidates that matches the search criteria. Returns a maximum of 100 records."
+```
 
 ### Hint
 
@@ -189,13 +217,13 @@ Our SDK repository goes through automated review by Hound bot. This checks for c
 The following methods are also not yet whitelisted.
 
 | Method | Replace with | Example |
-<!-- | -- | -- | ------- |
+| -- | -- | ------- |
 | GET | `get()` | `get("url", parameters)` |
 | POST | `post()` | `post("url", payload)` |
 | PUT | `put()` | `put("url", payload)` |
 | PATCH | `patch()` | `patch("url", payload)` |
 | DELETE | `delete()` | `delete("url", parameters)` |
-| OPTIONS | `options()` | `options("url", parameters)` | -->
+| OPTIONS | `options()` | `options("url", parameters)` |
 
 # Example Adapters
 
