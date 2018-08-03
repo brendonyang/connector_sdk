@@ -8,20 +8,21 @@ Alternatively, Workato offers a [HTTP Connector](http://bit.ly/WorkatoHTTPConnec
 
 ## Custom Connector Examples
 
-| Connector | API Type | Authentication Type | Remarks |
-| [Action Network connector](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/api_key_auth/action_network_connector.rb) | -------- | API Key | |
-| [Bill.com connector](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/custom_auth/bill_connector.rb) | -------- | Custom | |
-| [BMC Innovation Suite connector](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/custom_auth/bmc_innovation_suite_connector.rb) | -------- | Custom | |
-| [Facebook connector](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/api_key_auth/facebook_connector.rb) | -------- | API Key | |
-| [Freshdesk connector](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/basic_auth/freshdesk_connector.rb) | -------- | Basic | |
-| [Google BigQuery connector](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/oauth2/google_bigquery_connector.rb) | -------- | OAuth 2.0 | |
-| [Harvest connector](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/oauth2/harvest_connector.rb) | -------- | OAuth 2.0 | |
-| [Mandrill connector](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/api_key_auth/mandrill_connector.rb) | -------- | API Key | |
-| [Marketo connector](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/custom_auth/marketo_connector.rb) | -------- | Custom | |
-| [NationBuilder connector](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/oauth2/nationbuilder_connector.rb) | -------- | OAuth 2.0 | |
-| [On-prem Security connector](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/basic_auth/onprem_security.rb) | -------- | Basic | |
-| [RightSignature connector](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/api_key_auth/rightsignature_connector.rb) | -------- | API Key | |
-| [Typeform connector](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/oauth2/typeform_connector.rb) | -------- | OAuth 2.0 | |
+Connector | API Type | Authentication Type | Remarks
+--------  | -------- | ------------------- | -------
+[Action Network](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/api_key_auth/action_network_connector.rb) | REST | API Key |
+[Bill.com](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/custom_auth/bill_connector.rb) | REST | Custom |
+[BMC Innovation Suite](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/custom_auth/bmc_innovation_suite_connector.rb) | REST | Custom |
+[Facebook](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/api_key_auth/facebook_connector.rb) | REST | API Key |
+[Freshdesk](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/basic_auth/freshdesk_connector.rb) | REST | Basic |
+[Google BigQuery](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/oauth2/google_bigquery_connector.rb) | REST | OAuth 2.0 |
+[Harvest](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/oauth2/harvest_connector.rb) | REST | OAuth 2.0 |
+[Mandrill](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/api_key_auth/mandrill_connector.rb) | REST | API Key |
+[Marketo](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/custom_auth/marketo_connector.rb) | REST | Custom |
+[NationBuilder](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/oauth2/nationbuilder_connector.rb) | REST | OAuth 2.0 |
+[On-prem Security](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/basic_auth/onprem_security.rb) | REST | Basic |
+[RightSignature](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/api_key_auth/rightsignature_connector.rb) | REST | API Key |
+[Typeform](https://github.com/workato/custom_connector_docs/blob/master/custom_connectors/oauth2/typeform_connector.rb) | REST | OAuth 2.0 |
 
 ## Process
 
