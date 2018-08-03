@@ -30,11 +30,11 @@ Connector | API Type | Authentication Type | Remarks
 
 After developing a custom adapter, you may submit it to us by taking the following steps.
 
-1. Create a fork of workato/custom_connector_docs.
+1. Create a fork of `workato/custom_connector_docs`.
 2. Upload your files into the correct folders in your own repository.
-   - Adapter code: upload under the folder workato/custom_connector_docs/custom_connectors/sdk_code. Take note to follow the naming convention for your connector code: adapter_name_connector.rb
-   - Adapter icon: upload under the folder workato/custom_connector_docs/images. Your icon should have the same pixel size for its width and height.
-3. Create a Pull Request (PR) into the master branch of workato/custom_connector_docs for your added files.
+   - Adapter code: upload under the folder `custom_connectors/sdk_code`. Take note to follow the naming convention for your connector code: adapter_name_connector.rb
+   - Adapter icon: upload under the folder `images`. Your icon should have the same pixel size for its width and height.
+3. Create a Pull Request (PR) into the master branch of `workato/custom_connector_docs` repository for your added files.
    - Our SDK repository goes through automated review by Hound bot. This checks for compliance with Ruby coding style guide. Developers are asked to fix all hound comments.
 4. Submit your application to us [here](https://developer.workato.com).
    - Set your ticket type to "Submit Custom Adapter"
@@ -45,9 +45,9 @@ After submitting your request to us, we'd review your application get back to yo
 
 ### Enhancements To An Existing Adapter
 
-1. Create a fork of workato/custom_connector_docs (if it hasn't been created).
-2. Replace existing file from the folder workato/custom_connector_docs/custom_connectors/sdk_code in your own repository. Take note to follow the naming convention for your connector code: adapter_name_connector.rb
-3. Create a PR into the master branch of workato/custom_connector_docs for your added file.
+1. Create a fork of `workato/custom_connector_docs` (if it hasn't been created).
+2. Replace existing file from the folder `custom_connectors/sdk_code` in your own repository. Take note to follow the naming convention for your connector code: adapter_name_connector.rb
+3. Create a PR into the master branch of `workato/custom_connector_docs` respository for your added file.
   - Our SDK repository goes through automated review by Hound bot. This checks for compliance with Ruby coding style guide. Developers are asked to fix all hound comments.
 4. Submit your application to us [here](https://developer.workato.com).
   - Set your ticket type to "Submit Custom Adapter"
