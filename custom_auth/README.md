@@ -32,14 +32,14 @@ After developing a custom adapter, you may submit it to us by taking the followi
 
 1. Create a fork of workato/custom_connector_docs.
 2. Upload your files into the correct folders in your own repository.
-  - Adapter code: upload under the folder workato/custom_connector_docs/custom_connectors/sdk_code. Take note to follow the naming convention for your connector code: adapter_name_connector.rb
-  - Adapter icon: upload under the folder workato/custom_connector_docs/images. Your icon should have the same pixel size for its width and height.
+   - Adapter code: upload under the folder workato/custom_connector_docs/custom_connectors/sdk_code. Take note to follow the naming convention for your connector code: adapter_name_connector.rb
+   - Adapter icon: upload under the folder workato/custom_connector_docs/images. Your icon should have the same pixel size for its width and height.
 3. Create a Pull Request (PR) into the master branch of workato/custom_connector_docs for your added files.
-  - Our SDK repository goes through automated review by Hound bot. This checks for compliance with Ruby coding style guide. Developers are asked to fix all hound comments.
+   - Our SDK repository goes through automated review by Hound bot. This checks for compliance with Ruby coding style guide. Developers are asked to fix all hound comments.
 4. Submit your application to us [here](https://developer.workato.com).
-  - Set your ticket type to "Submit Custom Adapter"
-  - Set your ticket subject as "[New] <Adapter Name> Custom Adapter"
-  - Include the link to your PR in the ticket description.
+   - Set your ticket type to "Submit Custom Adapter"
+   - Set your ticket subject as "[New] <Adapter Name> Custom Adapter"
+   - Include the link to your PR in the ticket description.
 
 After submitting your request to us, we'd review your application get back to you shortly.
 
@@ -60,35 +60,35 @@ After submitting your request to us, we'd review your application get back to yo
 
 ## Table Of Contents
 1. [Introduction](https://docs.workato.com/workato-concepts.html)
-  .. [Recipe](https://docs.workato.com/workato-concepts.html#recipes)
-  .. [Trigger](https://docs.workato.com/workato-concepts.html#triggers)
-  .. [Action](https://docs.workato.com/workato-concepts.html#steps-and-actions)
+   - [Recipe](https://docs.workato.com/workato-concepts.html#recipes)
+   - [Trigger](https://docs.workato.com/workato-concepts.html#triggers)
+   - [Action](https://docs.workato.com/workato-concepts.html#steps-and-actions)
 2. [Custom Adapter Introduction](https://docs.workato.com/developing-connectors/sdk.html)
-  .. [Format](https://docs.workato.com/developing-connectors/sdk.html#format)
-  .. [Pagination](https://docs.workato.com/developing-connectors/sdk.html#pagination)
-  .. [Query](https://docs.workato.com/developing-connectors/sdk.html#query)
+   - [Format](https://docs.workato.com/developing-connectors/sdk.html#format)
+   - [Pagination](https://docs.workato.com/developing-connectors/sdk.html#pagination)
+   - [Query](https://docs.workato.com/developing-connectors/sdk.html#query)
 3. [Authentication](https://docs.workato.com/developing-connectors/sdk/authentication.html)
-  .. [Basic Authentication](https://docs.workato.com/developing-connectors/sdk/authentication/basic-authentication.html)
-  .. [API Key Authentication](https://docs.workato.com/developing-connectors/sdk/authentication/basic-authentication.html#api-key-authentication)
-  .. [OAuth 2.0](https://docs.workato.com/developing-connectors/sdk/authentication/oauth2-authentication.html)
-  .. [Custom Authentication](https://docs.workato.com/developing-connectors/sdk/authentication/custom-authentication.html)
-  .. [Test](https://docs.workato.com/developing-connectors/sdk/authentication/test.html)
+   - [Basic Authentication](https://docs.workato.com/developing-connectors/sdk/authentication/basic-authentication.html)
+   - [API Key Authentication](https://docs.workato.com/developing-connectors/sdk/authentication/basic-authentication.html#api-key-authentication)
+   - [OAuth 2.0](https://docs.workato.com/developing-connectors/sdk/authentication/oauth2-authentication.html)
+   - [Custom Authentication](https://docs.workato.com/developing-connectors/sdk/authentication/custom-authentication.html)
+   - [Test](https://docs.workato.com/developing-connectors/sdk/authentication/test.html)
 4. Building Custom adapters
-  .. [Trigger](https://docs.workato.com/developing-connectors/sdk/trigger.html)
-    .... [Poll Trigger](https://docs.workato.com/developing-connectors/sdk/trigger/poll-trigger.html)
-    .... [Dynamic Webhook Trigger](https://docs.workato.com/developing-connectors/sdk/trigger/webhook-trigger.html)
-    .... [Static Webhook Trigger](https://docs.workato.com/developing-connectors/sdk/trigger/static-webhook-trigger.html)
-  .. [Action](https://docs.workato.com/developing-connectors/sdk/action.html)
-    .... [Endpoints](https://docs.workato.com/developing-connectors/sdk/action.html#endpoints)
-    .... [Body](https://docs.workato.com/developing-connectors/sdk/action.html#body)
-  .. [Methods](https://docs.workato.com/developing-connectors/sdk/methods.html)
-  .. [Pick Lists](https://docs.workato.com/developing-connectors/sdk/pick-list.html)
-  .. [Static Pick List](https://docs.workato.com/developing-connectors/sdk/pick-list.html#static-example)
-  .. [Dynamic Pick List](https://docs.workato.com/developing-connectors/sdk/pick-list.html#dynamic-example)
-  .. [Dependent Pick Lists](https://docs.workato.com/developing-connectors/sdk/dependent-pick-list.html)
-    .... [Static Pick List](https://docs.workato.com/developing-connectors/sdk/dependent-pick-list.html#static-example)
-    .... [Dynamic Pick List](https://docs.workato.com/developing-connectors/sdk/dependent-pick-list.html#dynamic-example)
-  .. [Configuration Fields](https://docs.workato.com/developing-connectors/sdk/config-fields.html).
+   - [Trigger](https://docs.workato.com/developing-connectors/sdk/trigger.html)
+     - [Poll Trigger](https://docs.workato.com/developing-connectors/sdk/trigger/poll-trigger.html)
+     - [Dynamic Webhook Trigger](https://docs.workato.com/developing-connectors/sdk/trigger/webhook-trigger.html)
+     - [Static Webhook Trigger](https://docs.workato.com/developing-connectors/sdk/trigger/static-webhook-trigger.html)
+   - [Action](https://docs.workato.com/developing-connectors/sdk/action.html)
+     - [Endpoints](https://docs.workato.com/developing-connectors/sdk/action.html#endpoints)
+     - [Body](https://docs.workato.com/developing-connectors/sdk/action.html#body)
+   - [Methods](https://docs.workato.com/developing-connectors/sdk/methods.html)
+   - [Pick Lists](https://docs.workato.com/developing-connectors/sdk/pick-list.html)
+   - [Static Pick List](https://docs.workato.com/developing-connectors/sdk/pick-list.html#static-example)
+   - [Dynamic Pick List](https://docs.workato.com/developing-connectors/sdk/pick-list.html#dynamic-example)
+   - [Dependent Pick Lists](https://docs.workato.com/developing-connectors/sdk/dependent-pick-list.html)
+     - [Static Pick List](https://docs.workato.com/developing-connectors/sdk/dependent-pick-list.html#static-example)
+     - [Dynamic Pick List](https://docs.workato.com/developing-connectors/sdk/dependent-pick-list.html#dynamic-example)
+   - [Configuration Fields](https://docs.workato.com/developing-connectors/sdk/config-fields.html).
 
 # Coding Style
 
